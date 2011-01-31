@@ -8,6 +8,10 @@ RowFrame::RowFrame(int count)
 {
 }
 
+RowFrame::~RowFrame(void)
+{
+}
+
 Size RowFrame::getSize(void)
 {
     // todo

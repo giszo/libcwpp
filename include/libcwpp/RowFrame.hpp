@@ -11,6 +11,8 @@ class RowFrame : public Frame
   public:
     RowFrame(int count);
 
+    virtual ~RowFrame();
+
     Size getSize(void);
 
     void layout(int x, int y, int width, int height);

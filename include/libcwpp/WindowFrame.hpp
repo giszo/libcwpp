@@ -12,6 +12,8 @@ class WindowFrame : public Frame
   public:
     WindowFrame(Window* window);
 
+    virtual ~WindowFrame(void);
+
     Size getSize(void);
 
     void layout(int x, int y, int width, int height);

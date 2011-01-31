@@ -10,6 +10,10 @@ WindowFrame::WindowFrame(Window* window)
 {
 }
 
+WindowFrame::~WindowFrame(void)
+{
+}
+
 Size WindowFrame::getSize(void)
 {
     return m_window->getSize();
