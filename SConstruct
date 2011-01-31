@@ -6,7 +6,8 @@ env["CPPFLAGS"] = "-O2 -Wall -Iinclude"
 SConscript(
     [
         "SConscript",
-        "example/SConscript"
+        "example/SConscript",
+        "tst/SConscript"
     ],
     exports = "env"
 )

@@ -1,0 +1,11 @@
+# -*- python -*-
+
+Import("env")
+env = env.Clone()
+
+env.Program(
+    target = "test",
+    source = ["main.cpp", "FrameTest.cpp"],
+    LIBS = ["cwpp", "cppunit"],
+    LIBPATH = "../"
+)
