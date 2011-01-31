@@ -8,6 +8,10 @@ ColumnFrame::ColumnFrame(int count)
 {
 }
 
+ColumnFrame::~ColumnFrame(void)
+{
+}
+
 Size ColumnFrame::getSize(void)
 {
     // todo

@@ -10,6 +10,7 @@ class ColumnFrame : public Frame
 {
   public:
     ColumnFrame(int count);
+    virtual ~ColumnFrame(void);
 
     Size getSize(void);
 

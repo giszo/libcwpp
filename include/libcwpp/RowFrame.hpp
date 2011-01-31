@@ -10,7 +10,6 @@ class RowFrame : public Frame
 {
   public:
     RowFrame(int count);
-
     virtual ~RowFrame();
 
     Size getSize(void);
