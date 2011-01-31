@@ -19,6 +19,16 @@ Frame::Frame(int count)
     }
 }
 
+Frame::~Frame(void)
+{
+  for (int i = 0; i < m_count; i++)
+  {
+    delete m_children[i];
+  }
+
+  delete [] m_children;
+}
+
 void Frame::set(int index, Frame* child)
 {
     if ((index < 0) ||

@@ -11,6 +11,8 @@ class Frame
   public:
     Frame(int count);
 
+    virtual ~Frame(void);
+
     virtual Size getSize(void) = 0;
 
     void set(int index, Frame* child);
