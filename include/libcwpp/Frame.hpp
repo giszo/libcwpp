@@ -1,0 +1,27 @@
+#ifndef LIBCWPP_FRAME_HPP
+#define LIBCWPP_FRAME_HPP
+
+#include <libcwpp/Size.hpp>
+
+namespace libcwpp
+{
+
+class Frame
+{
+  public:
+    Frame(int count);
+
+    virtual Size getSize(void) = 0;
+
+    void set(int index, Frame* child);
+
+    virtual void layout(int x, int y, int width, int height) = 0;
+
+  protected:
+    int m_count;
+    Frame** m_children;
+}; /* class Frame */
+
+} /* namespace libcwpp */
+
+#endif /* LIBCWPP_FRAME_HPP */

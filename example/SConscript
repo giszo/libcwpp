@@ -1,0 +1,11 @@
+# -*- python -*-
+
+Import("env")
+env = env.Clone()
+
+env.Program(
+    target = "layout1",
+    source = ["layout1.cpp"],
+    LIBS = ["cwpp"],
+    LIBPATH = "../"
+)
