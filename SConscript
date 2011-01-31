@@ -9,6 +9,7 @@ env.SharedLibrary(
         "src/Window.cpp",
         "src/Frame.cpp",
         "src/RowFrame.cpp",
+        "src/ColumnFrame.cpp",
         "src/WindowFrame.cpp",
         "src/Size.cpp"
     ]

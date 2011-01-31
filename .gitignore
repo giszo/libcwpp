@@ -1,3 +1,5 @@
 .sconsign.dblite
 libcwpp.so
 src/*.os
+example/layout1
+example/*.o
