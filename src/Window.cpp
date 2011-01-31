@@ -3,4 +3,4 @@
 namespace libcwpp
 {
 
-} /* namespacw libcwpp */
+} /* namespace libcwpp */
