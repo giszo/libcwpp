@@ -16,6 +16,9 @@ class Frame
 
     bool set(int index, Frame* child);
 
+    virtual void paint(void);
+    virtual void refresh(void);
+
     virtual void layout(int x, int y, int width, int height) = 0;
 
   protected:

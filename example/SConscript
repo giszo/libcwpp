@@ -9,3 +9,10 @@ env.Program(
     LIBS = ["cwpp"],
     LIBPATH = "../"
 )
+
+env.Program(
+    target = "hello",
+    source = ["hello.cpp"],
+    LIBS = ["cwpp"],
+    LIBPATH = "../"
+)

@@ -37,4 +37,20 @@ bool Frame::set(int index, Frame* child)
     return true;
 }
 
+void Frame::paint(void)
+{
+    for (int i = 0; i < m_count; i++)
+    {
+        m_children[i]->paint();
+    }
+}
+
+void Frame::refresh(void)
+{
+    for (int i = 0; i < m_count; i++)
+    {
+        m_children[i]->refresh();
+    }
+}
+
 } /* namespace libcwpp */
