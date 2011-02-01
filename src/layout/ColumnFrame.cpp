@@ -1,3 +1,5 @@
+#include <algorithm>
+
 #include <libcwpp/layout/ColumnFrame.hpp>
 
 namespace libcwpp
@@ -16,8 +18,22 @@ ColumnFrame::~ColumnFrame(void)
 
 libcwpp::core::Size ColumnFrame::getSize(void)
 {
-    // todo
-    return libcwpp::core::Size(0, 0, 0, 0);
+    int minWidth = 0;
+    int maxWidth = 0;
+    int minHeight = 0;
+    int maxHeight = 0;
+
+    for (int i = 0; i < m_count; i++)
+    {
+        libcwpp::core::Size size = m_children[i]->getSize();
+
+        minWidth += size.minWidth();
+        // todo maxWidth
+        minHeight = std::max(minHeight, size.minHeight());
+        maxHeight = std::max(maxHeight, size.maxHeight());
+    }
+
+    return libcwpp::core::Size(minWidth, maxWidth, minHeight, maxHeight);
 }
 
 void ColumnFrame::layout(int x, int y, int width, int height)

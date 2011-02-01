@@ -1,3 +1,5 @@
+#include <algorithm>
+
 #include <libcwpp/layout/RowFrame.hpp>
 
 namespace libcwpp
@@ -16,8 +18,23 @@ RowFrame::~RowFrame(void)
 
 libcwpp::core::Size RowFrame::getSize(void)
 {
-    // todo
-    return libcwpp::core::Size(0, 0, 0, 0);
+    int minWidth = 0;
+    int maxWidth = 0;
+    int minHeight = 0;
+    int maxHeight = 0;
+
+    for (int i = 0; i < m_count; i++)
+    {
+        libcwpp::core::Size size = m_children[i]->getSize();
+
+        minWidth = std::max(minWidth, size.minWidth());
+        maxWidth = std::max(maxWidth, size.maxWidth());
+
+        minHeight += size.minHeight();
+        // todo maxHeight
+    }
+
+    return libcwpp::core::Size(minWidth, maxWidth, minHeight, maxHeight);
 }
 
 void RowFrame::layout(int x, int y, int width, int height)
