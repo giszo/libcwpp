@@ -41,7 +41,6 @@ libcwpp::stream::Stream& BufferedWindow::BufferedStream::operator<<(const libcwp
 {
     m_window->add(m_buffer);
     m_buffer.clear();
-    // todo: repaint the window
     return *this;
 }
 
@@ -60,6 +59,8 @@ libcwpp::stream::Stream& BufferedWindow::createStream(void)
 void BufferedWindow::paint(void)
 {
     int y = 0;
+
+    clear();
 
     for (std::deque<std::string>::const_iterator it = m_lines.begin();
          it != m_lines.end();
@@ -94,6 +95,8 @@ void BufferedWindow::add(const std::string& buffer)
     }
 
     m_lastLineClosed = (buffer[buffer.size() - 1] == '\n');
+
+    invalidate();
 }
 
 } /* namespace window */

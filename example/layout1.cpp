@@ -1,5 +1,4 @@
 #include <limits.h>
-#include <unistd.h>
 
 #include <libcwpp/core/Window.hpp>
 #include <libcwpp/core/WindowManager.hpp>
@@ -50,7 +49,6 @@ int main(int argc, char** argv)
     winMgr.setRootFrame(&frame);
 
     winMgr.run();
-    sleep(3);
     winMgr.destroy();
 
     return 0;

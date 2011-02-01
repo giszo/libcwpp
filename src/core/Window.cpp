@@ -1,4 +1,5 @@
 #include <libcwpp/core/Window.hpp>
+#include <libcwpp/core/WindowManager.hpp>
 
 namespace libcwpp
 {
@@ -59,6 +60,21 @@ void Window::print(int x, int y, const char* format, ...)
     wmove(m_window, y, x);
     vw_printw(m_window, format, args);
     va_end(args);
+}
+
+void Window::invalidate(void)
+{
+    if (m_windowManager == NULL)
+    {
+        return;
+    }
+
+    m_windowManager->pushEvent(WindowManager::E_WINDOW_INVALIDATED);
+}
+
+void Window::keyPressed(int key)
+{
+    /* do nothing here ... */
 }
 
 } /* namespace core */

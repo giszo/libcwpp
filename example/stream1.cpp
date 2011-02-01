@@ -1,4 +1,3 @@
-#include <unistd.h>
 #include <limits.h>
 
 #include <libcwpp/core/WindowManager.hpp>
@@ -34,7 +33,6 @@ int main(int argc, char** argv)
     s << libcwpp::stream::Flush();
 
     winMgr.run();
-    sleep(3);
     winMgr.destroy();
 
     return 0;

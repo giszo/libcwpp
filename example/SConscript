@@ -23,3 +23,10 @@ env.Program(
     LIBS = ["cwpp"],
     LIBPATH = "../"
 )
+
+env.Program(
+    target = "input",
+    source = ["input.cpp"],
+    LIBS = ["cwpp"],
+    LIBPATH = "../"
+)

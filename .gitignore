@@ -7,4 +7,5 @@ libcwpp.so
 example/hello
 example/layout1
 example/stream1
+example/input
 tst/test

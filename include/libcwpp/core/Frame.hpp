@@ -8,6 +8,8 @@ namespace libcwpp
 namespace core
 {
 
+class WindowManager;
+
 class Frame
 {
   public:
@@ -18,6 +20,8 @@ class Frame
 
     bool set(int index, Frame* child);
 
+    void setWindowManager(WindowManager* windowManager);
+
     virtual void paint(void);
     virtual void refresh(void);
 
@@ -26,6 +30,8 @@ class Frame
   protected:
     int m_count;
     Frame** m_children;
+
+    WindowManager* m_windowManager;
 }; /* class Frame */
 
 } /* namespace core */

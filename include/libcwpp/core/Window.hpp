@@ -27,6 +27,9 @@ class Window : public Frame
     void clear(void);
     void print(int x, int y, const char* format, ...) __attribute__(( format(printf, 4, 5) ));
 
+    void invalidate(void);
+
+    virtual void keyPressed(int key);
     virtual void paint(void) = 0;
 
   private:

@@ -8,7 +8,8 @@ namespace core
 {
 
 Frame::Frame(int count)
-    : m_count(count), m_children(NULL)
+    : m_count(count), m_children(NULL),
+      m_windowManager(NULL)
 {
     if (m_count > 0)
     {
@@ -36,7 +37,22 @@ bool Frame::set(int index, Frame* child)
 
     m_children[index] = child;
 
+    if (m_windowManager != NULL)
+    {
+        child->setWindowManager(m_windowManager);
+    }
+
     return true;
+}
+
+void Frame::setWindowManager(WindowManager* windowManager)
+{
+    m_windowManager = windowManager;
+
+    for (int i = 0; i < m_count; i++)
+    {
+        m_children[i]->setWindowManager(windowManager);
+    }
 }
 
 void Frame::paint(void)
