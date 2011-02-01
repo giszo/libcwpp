@@ -21,6 +21,7 @@ Size RowFrame::getSize(void)
 void RowFrame::layout(int x, int y, int width, int height)
 {
     int dynamicCount = 0;
+    int dynamicHeight;
     int remainingHeight = height;
 
     /* Do some calculation first. */
@@ -39,7 +40,14 @@ void RowFrame::layout(int x, int y, int width, int height)
         }
     }
 
-    int dynamicHeight = remainingHeight / dynamicCount;
+    if (dynamicCount > 0)
+    {
+        dynamicHeight = remainingHeight / dynamicCount;
+    }
+    else
+    {
+        dynamicHeight = 0;
+    }
 
     /* Do the actual layout work. */
     for (int i = 0; i < m_count; i++)

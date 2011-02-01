@@ -14,7 +14,7 @@ class Frame
 
     virtual Size getSize(void) = 0;
 
-    void set(int index, Frame* child);
+    bool set(int index, Frame* child);
 
     virtual void layout(int x, int y, int width, int height) = 0;
 
