@@ -1,3 +1,5 @@
+#include <limits.h>
+
 #include <algorithm>
 
 #include <libcwpp/layout/RowFrame.hpp>
@@ -31,7 +33,16 @@ libcwpp::core::Size RowFrame::getSize(void)
         maxWidth = std::max(maxWidth, size.maxWidth());
 
         minHeight += size.minHeight();
-        // todo maxHeight
+
+        if ((maxHeight == INT_MAX) ||
+            (size.maxHeight() == INT_MAX))
+        {
+            maxHeight = INT_MAX;
+        }
+        else
+        {
+            maxHeight += size.maxHeight();
+        }
     }
 
     return libcwpp::core::Size(minWidth, maxWidth, minHeight, maxHeight);

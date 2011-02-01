@@ -1,3 +1,5 @@
+#include <limits.h>
+
 #include <algorithm>
 
 #include <libcwpp/layout/ColumnFrame.hpp>
@@ -28,7 +30,17 @@ libcwpp::core::Size ColumnFrame::getSize(void)
         libcwpp::core::Size size = m_children[i]->getSize();
 
         minWidth += size.minWidth();
-        // todo maxWidth
+
+        if ((maxWidth == INT_MAX) ||
+            (size.maxWidth() == INT_MAX))
+        {
+            maxWidth = INT_MAX;
+        }
+        else
+        {
+            maxWidth += size.maxWidth();
+        }
+
         minHeight = std::max(minHeight, size.minHeight());
         maxHeight = std::max(maxHeight, size.maxHeight());
     }
