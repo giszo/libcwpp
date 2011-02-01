@@ -13,6 +13,7 @@ env.SharedLibrary(
         "src/layout/RowFrame.cpp",
         "src/layout/ColumnFrame.cpp",
         "src/window/BufferedWindow.cpp",
+        "src/window/InputWindow.cpp",
         "src/util/StringUtils.cpp"
     ],
     LIBS = ["ncurses"]
