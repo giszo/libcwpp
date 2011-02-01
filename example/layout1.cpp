@@ -1,4 +1,5 @@
 #include <limits.h>
+#include <unistd.h>
 
 #include <libcwpp/Window.hpp>
 #include <libcwpp/RowFrame.hpp>
@@ -12,7 +13,10 @@ class LineWindow : public libcwpp::Window
         : Window(libcwpp::Size(1, 1, 1, 1))
     {}
 
-    void paint(void) {}
+    void paint(void)
+    {
+        print(0, 0, "This is a one-line window.");
+    }
 }; /* class MyWindow1 */
 
 class BigWindow : public libcwpp::Window
@@ -22,31 +26,33 @@ class BigWindow : public libcwpp::Window
         : Window(libcwpp::Size(1, INT_MAX, 1, INT_MAX))
     {}
 
-    void paint(void) {}
+    void paint(void)
+    {
+        int y = (height() - 3) / 2;
+
+        print(10, y, "This is a");
+        print(10, y + 1, "bigger window with");
+        print(10, y + 2, "more than one line");
+        print(width() - 3, height() - 1, ":)");
+    }
 };
 
 int main(int argc, char** argv)
 {
-    libcwpp::WindowManager windowManager;
-    windowManager.init();
+    libcwpp::WindowManager winMgr;
+    winMgr.init();
 
     BigWindow win1;
     LineWindow win2;
 
-    libcwpp::RowFrame frame1(2);
-    frame1.set(0, &win1);
-    frame1.set(1, &win2);
-    frame1.layout(0, 0, 80, 25);
+    libcwpp::RowFrame frame(2);
+    frame.set(0, &win1);
+    frame.set(1, &win2);
+    winMgr.setRootFrame(&frame);
 
-    BigWindow win3;
-    LineWindow win4;
-
-    libcwpp::ColumnFrame frame2(2);
-    frame2.set(0, &win3);
-    frame2.set(1, &win4);
-    frame2.layout(0, 0, 80, 25);
-
-    windowManager.destroy();
+    winMgr.run();
+    sleep(3);
+    winMgr.destroy();
 
     return 0;
 }

@@ -2,6 +2,7 @@
 libcwpp.so
 src/*.os
 example/layout1
+example/hello
 example/*.o
 tst/*.o
 tst/test
