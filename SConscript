@@ -11,7 +11,8 @@ env.SharedLibrary(
         "src/RowFrame.cpp",
         "src/ColumnFrame.cpp",
         "src/Size.cpp",
-        "src/WindowManager.cpp"
+        "src/WindowManager.cpp",
+        "src/BufferedWindow.cpp"
     ],
     LIBS = ["ncurses"]
 )

@@ -16,3 +16,10 @@ env.Program(
     LIBS = ["cwpp"],
     LIBPATH = "../"
 )
+
+env.Program(
+    target = "stream1",
+    source = ["stream1.cpp"],
+    LIBS = ["cwpp"],
+    LIBPATH = "../"
+)
