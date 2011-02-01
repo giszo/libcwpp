@@ -1,20 +1,20 @@
 #ifndef TEST_HELPERS_HPP
 #define TEST_HELPERS_HPP
 
-#include <libcwpp/Frame.hpp>
+#include <libcwpp/core/Frame.hpp>
 
 #define TEST_HEADER std::cout << std::endl << __FUNCTION__ << ": " << __FILE__ << ":" <<  __LINE__ << std::endl;
 
-class TestFrame : public libcwpp::Frame
+class TestFrame : public libcwpp::core::Frame
 {
   public:
-    TestFrame(const libcwpp::Size& size)
+    TestFrame(const libcwpp::core::Size& size)
         : Frame(0),
           m_x(-1), m_y(-1), m_width(-1), m_height(-1), m_layoutCalled(false),
           m_size(size)
     {}
 
-    libcwpp::Size getSize(void)
+    libcwpp::core::Size getSize(void)
     {
         return m_size;
     }
@@ -35,7 +35,7 @@ class TestFrame : public libcwpp::Frame
     int m_height;
     bool m_layoutCalled;
 
-    libcwpp::Size m_size;
+    libcwpp::core::Size m_size;
 }; /* class TestFrame */
 
 #endif /* TEST_HELPERS_HPP */

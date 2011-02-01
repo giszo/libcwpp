@@ -1,9 +1,11 @@
 #ifndef LIBCWPP_WINDOWMANAGER_HPP
 #define LIBCWPP_WINDOWMANAGER_HPP
 
-#include <libcwpp/Frame.hpp>
+#include <libcwpp/core/Frame.hpp>
 
 namespace libcwpp
+{
+namespace core
 {
 
 class WindowManager
@@ -25,6 +27,7 @@ class WindowManager
     Frame* m_rootFrame;
 }; /* class WindowManager */
 
+} /* namespace core */
 } /* namespace libcwpp */
 
 #endif /* LIBCWPP_WINDOWMANAGER_HPP */

@@ -1,8 +1,10 @@
 #include <stddef.h>
 
-#include <libcwpp/Frame.hpp>
+#include <libcwpp/core/Frame.hpp>
 
 namespace libcwpp
+{
+namespace core
 {
 
 Frame::Frame(int count)
@@ -53,4 +55,5 @@ void Frame::refresh(void)
     }
 }
 
+} /* namespace core */
 } /* namespace libcwpp */

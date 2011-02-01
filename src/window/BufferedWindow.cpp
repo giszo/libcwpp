@@ -1,20 +1,22 @@
-#include <libcwpp/BufferedWindow.hpp>
+#include <libcwpp/window/BufferedWindow.hpp>
 
 namespace libcwpp
 {
+namespace window
+{
 
-BufferedStream::BufferedStream(BufferedWindow* window)
+BufferedWindow::BufferedStream::BufferedStream(BufferedWindow* window)
     : m_window(window)
 {
 }
 
-libcwpp::stream::Stream& BufferedStream::operator<<(const char* s)
+libcwpp::stream::Stream& BufferedWindow::BufferedStream::operator<<(const char* s)
 {
     m_buffer += s;
     return *this;
 }
 
-libcwpp::stream::Stream& BufferedStream::operator<<(const libcwpp::stream::Flush& f)
+libcwpp::stream::Stream& BufferedWindow::BufferedStream::operator<<(const libcwpp::stream::Flush& f)
 {
     m_window->add(m_buffer);
     m_buffer.clear();
@@ -22,7 +24,7 @@ libcwpp::stream::Stream& BufferedStream::operator<<(const libcwpp::stream::Flush
     return *this;
 }
 
-BufferedWindow::BufferedWindow(Size size)
+BufferedWindow::BufferedWindow(libcwpp::core::Size size)
     : Window(size)
 {
 }
@@ -52,4 +54,5 @@ void BufferedWindow::add(const std::string& buffer)
     m_lines.push_back(buffer);
 }
 
+} /* namespace window */
 } /* namespace libcwpp */

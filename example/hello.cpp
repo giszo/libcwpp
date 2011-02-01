@@ -1,14 +1,14 @@
 #include <unistd.h>
 #include <limits.h>
 
-#include <libcwpp/Window.hpp>
-#include <libcwpp/WindowManager.hpp>
+#include <libcwpp/core/Window.hpp>
+#include <libcwpp/core/WindowManager.hpp>
 
-class HelloWindow : public libcwpp::Window
+class HelloWindow : public libcwpp::core::Window
 {
   public:
     HelloWindow(void)
-        : Window(libcwpp::Size(1, INT_MAX, 1, INT_MAX))
+        : Window(libcwpp::core::Size(1, INT_MAX, 1, INT_MAX))
     {}
 
     void paint(void)
@@ -19,7 +19,7 @@ class HelloWindow : public libcwpp::Window
 
 int main(int argc, char** argv)
 {
-    libcwpp::WindowManager winMgr;
+    libcwpp::core::WindowManager winMgr;
     winMgr.init();
 
     HelloWindow window;

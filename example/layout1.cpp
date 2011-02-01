@@ -1,16 +1,15 @@
 #include <limits.h>
 #include <unistd.h>
 
-#include <libcwpp/Window.hpp>
-#include <libcwpp/RowFrame.hpp>
-#include <libcwpp/ColumnFrame.hpp>
-#include <libcwpp/WindowManager.hpp>
+#include <libcwpp/core/Window.hpp>
+#include <libcwpp/core/WindowManager.hpp>
+#include <libcwpp/layout/RowFrame.hpp>
 
-class LineWindow : public libcwpp::Window
+class LineWindow : public libcwpp::core::Window
 {
   public:
     LineWindow(void)
-        : Window(libcwpp::Size(1, 1, 1, 1))
+        : Window(libcwpp::core::Size(1, 1, 1, 1))
     {}
 
     void paint(void)
@@ -19,11 +18,11 @@ class LineWindow : public libcwpp::Window
     }
 }; /* class MyWindow1 */
 
-class BigWindow : public libcwpp::Window
+class BigWindow : public libcwpp::core::Window
 {
   public:
     BigWindow(void)
-        : Window(libcwpp::Size(1, INT_MAX, 1, INT_MAX))
+        : Window(libcwpp::core::Size(1, INT_MAX, 1, INT_MAX))
     {}
 
     void paint(void)
@@ -39,13 +38,13 @@ class BigWindow : public libcwpp::Window
 
 int main(int argc, char** argv)
 {
-    libcwpp::WindowManager winMgr;
+    libcwpp::core::WindowManager winMgr;
     winMgr.init();
 
     BigWindow win1;
     LineWindow win2;
 
-    libcwpp::RowFrame frame(2);
+    libcwpp::layout::RowFrame frame(2);
     frame.set(0, &win1);
     frame.set(1, &win2);
     winMgr.setRootFrame(&frame);

@@ -3,9 +3,11 @@
 
 #include <ncurses.h>
 
-#include <libcwpp/Frame.hpp>
+#include <libcwpp/core/Frame.hpp>
 
 namespace libcwpp
+{
+namespace core
 {
 
 class Window : public Frame
@@ -36,6 +38,7 @@ class Window : public Frame
     WINDOW* m_window;
 }; /* class Window */
 
+} /* namespace core */
 } /* namespace libcwpp */
 
 #endif /* LIBCWPP_WINDOW_HPP */

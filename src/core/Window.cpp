@@ -1,6 +1,8 @@
-#include <libcwpp/Window.hpp>
+#include <libcwpp/core/Window.hpp>
 
 namespace libcwpp
+{
+namespace core
 {
 
 Window::Window(Size size)
@@ -59,4 +61,5 @@ void Window::print(int x, int y, const char* format, ...)
     va_end(args);
 }
 
+} /* namespace core */
 } /* namespace libcwpp */

@@ -1,9 +1,11 @@
 #ifndef LIBCWPP_FRAME_HPP
 #define LIBCWPP_FRAME_HPP
 
-#include <libcwpp/Size.hpp>
+#include <libcwpp/core/Size.hpp>
 
 namespace libcwpp
+{
+namespace core
 {
 
 class Frame
@@ -26,6 +28,7 @@ class Frame
     Frame** m_children;
 }; /* class Frame */
 
+} /* namespace core */
 } /* namespace libcwpp */
 
 #endif /* LIBCWPP_FRAME_HPP */

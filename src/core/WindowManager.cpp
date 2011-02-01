@@ -2,9 +2,11 @@
 #include <ncurses.h>
 #include <sys/ioctl.h>
 
-#include <libcwpp/WindowManager.hpp>
+#include <libcwpp/core/WindowManager.hpp>
 
 namespace libcwpp
+{
+namespace core
 {
 
 WindowManager::WindowManager(void)
@@ -76,4 +78,5 @@ bool WindowManager::getTerminalSize(int& width, int& height)
     return true;
 }
 
+} /* namespace core */
 } /* namespace libcwpp */

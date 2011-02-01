@@ -1,6 +1,8 @@
-#include <libcwpp/RowFrame.hpp>
+#include <libcwpp/layout/RowFrame.hpp>
 
 namespace libcwpp
+{
+namespace layout
 {
 
 RowFrame::RowFrame(int count)
@@ -12,10 +14,10 @@ RowFrame::~RowFrame(void)
 {
 }
 
-Size RowFrame::getSize(void)
+libcwpp::core::Size RowFrame::getSize(void)
 {
     // todo
-    return Size(0, 0, 0, 0);
+    return libcwpp::core::Size(0, 0, 0, 0);
 }
 
 void RowFrame::layout(int x, int y, int width, int height)
@@ -27,8 +29,8 @@ void RowFrame::layout(int x, int y, int width, int height)
     /* Do some calculation first. */
     for (int i = 0; i < m_count; i++)
     {
-        Frame* child = m_children[i];
-        Size size = child->getSize();
+        libcwpp::core::Frame* child = m_children[i];
+        libcwpp::core::Size size = child->getSize();
 
         if (size.isHeightDynamic())
         {
@@ -52,8 +54,8 @@ void RowFrame::layout(int x, int y, int width, int height)
     /* Do the actual layout work. */
     for (int i = 0; i < m_count; i++)
     {
-        Frame* child = m_children[i];
-        Size size = child->getSize();
+        libcwpp::core::Frame* child = m_children[i];
+        libcwpp::core::Size size = child->getSize();
 
         if (size.isHeightDynamic())
         {
@@ -69,4 +71,5 @@ void RowFrame::layout(int x, int y, int width, int height)
     }
 }
 
+} /* namespace layout */
 } /* namespace libcwpp */

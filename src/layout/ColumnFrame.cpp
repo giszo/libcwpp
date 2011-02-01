@@ -1,6 +1,8 @@
-#include <libcwpp/ColumnFrame.hpp>
+#include <libcwpp/layout/ColumnFrame.hpp>
 
 namespace libcwpp
+{
+namespace layout
 {
 
 ColumnFrame::ColumnFrame(int count)
@@ -12,10 +14,10 @@ ColumnFrame::~ColumnFrame(void)
 {
 }
 
-Size ColumnFrame::getSize(void)
+libcwpp::core::Size ColumnFrame::getSize(void)
 {
     // todo
-    return Size(0, 0, 0, 0);
+    return libcwpp::core::Size(0, 0, 0, 0);
 }
 
 void ColumnFrame::layout(int x, int y, int width, int height)
@@ -27,8 +29,8 @@ void ColumnFrame::layout(int x, int y, int width, int height)
     /* Do some calculation first. */
     for (int i = 0; i < m_count; i++)
     {
-        Frame* child = m_children[i];
-        Size size = child->getSize();
+        libcwpp::core::Frame* child = m_children[i];
+        libcwpp::core::Size size = child->getSize();
 
         if (size.isWidthDynamic())
         {
@@ -52,8 +54,8 @@ void ColumnFrame::layout(int x, int y, int width, int height)
     /* Do the actual layout work. */
     for (int i = 0; i < m_count; i++)
     {
-        Frame* child = m_children[i];
-        Size size = child->getSize();
+        libcwpp::core::Frame* child = m_children[i];
+        libcwpp::core::Size size = child->getSize();
 
         if (size.isWidthDynamic())
         {
@@ -69,4 +71,5 @@ void ColumnFrame::layout(int x, int y, int width, int height)
     }
 }
 
+} /* namespace layout */
 } /* namespace libcwpp */

@@ -3,7 +3,7 @@
 #include "FrameTest.hpp"
 #include "TestHelpers.hpp"
 
-#include <libcwpp/RowFrame.hpp>
+#include <libcwpp/layout/RowFrame.hpp>
 
 CPPUNIT_TEST_SUITE_REGISTRATION(FrameTest);
 
@@ -22,7 +22,7 @@ FrameTest::testFrameInvalidSet()
 {
     TEST_HEADER;
 
-    libcwpp::RowFrame frame(3);
+    libcwpp::layout::RowFrame frame(3);
 
     CPPUNIT_ASSERT_EQUAL(frame.set(-1, NULL), false);
     CPPUNIT_ASSERT_EQUAL(frame.set( 3, NULL), false);
@@ -34,8 +34,8 @@ FrameTest::testRowFrameOneFixed()
 {
     TEST_HEADER;
 
-    TestFrame tst1(libcwpp::Size(1, INT_MAX, 1, 1));
-    libcwpp::RowFrame frame(1);
+    TestFrame tst1(libcwpp::core::Size(1, INT_MAX, 1, 1));
+    libcwpp::layout::RowFrame frame(1);
     frame.set(0, &tst1);
     frame.layout(0, 0, 80, 25);
 
@@ -51,9 +51,9 @@ FrameTest::testRowFrameTwoFixed()
 {
     TEST_HEADER;
 
-    TestFrame tst1(libcwpp::Size(1, INT_MAX, 3, 3));
-    TestFrame tst2(libcwpp::Size(1, INT_MAX, 2, 2));
-    libcwpp::RowFrame frame(2);
+    TestFrame tst1(libcwpp::core::Size(1, INT_MAX, 3, 3));
+    TestFrame tst2(libcwpp::core::Size(1, INT_MAX, 2, 2));
+    libcwpp::layout::RowFrame frame(2);
     frame.set(0, &tst1);
     frame.set(1, &tst2);
     frame.layout(0, 0, 80, 25);
@@ -76,8 +76,8 @@ FrameTest::testRowFrameOneDynamic()
 {
     TEST_HEADER;
 
-    TestFrame tst1(libcwpp::Size(1, INT_MAX, 1, INT_MAX));
-    libcwpp::RowFrame frame(1);
+    TestFrame tst1(libcwpp::core::Size(1, INT_MAX, 1, INT_MAX));
+    libcwpp::layout::RowFrame frame(1);
     frame.set(0, &tst1);
     frame.layout(0, 0, 80, 25);
 
@@ -93,9 +93,9 @@ FrameTest::testRowFrameTwoDynamic()
 {
     TEST_HEADER;
 
-    TestFrame tst1(libcwpp::Size(1, INT_MAX, 1, INT_MAX));
-    TestFrame tst2(libcwpp::Size(1, INT_MAX, 1, INT_MAX));
-    libcwpp::RowFrame frame(2);
+    TestFrame tst1(libcwpp::core::Size(1, INT_MAX, 1, INT_MAX));
+    TestFrame tst2(libcwpp::core::Size(1, INT_MAX, 1, INT_MAX));
+    libcwpp::layout::RowFrame frame(2);
     frame.set(0, &tst1);
     frame.set(1, &tst2);
     frame.layout(0, 0, 80, 24);

@@ -1,6 +1,8 @@
-#include <libcwpp/Size.hpp>
+#include <libcwpp/core/Size.hpp>
 
 namespace libcwpp
+{
+namespace core
 {
 
 Size::Size(int minWidth, int maxWidth, int minHeight, int maxHeight)
@@ -38,4 +40,5 @@ bool Size::isHeightDynamic(void) const
     return (m_minHeight < m_maxHeight);
 }
 
+} /* namespace core */
 } /* namespace libcwpp */

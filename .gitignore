@@ -1,9 +1,10 @@
+src/*/*.os
+example/*.o
+tst/*.o
+
 .sconsign.dblite
 libcwpp.so
-src/*.os
 example/hello
 example/layout1
 example/stream1
-example/*.o
-tst/*.o
 tst/test

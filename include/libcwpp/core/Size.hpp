@@ -3,6 +3,8 @@
 
 namespace libcwpp
 {
+namespace core
+{
 
 class Size
 {
@@ -25,6 +27,7 @@ class Size
     int m_maxHeight;
 }; /* class Size */
 
+} /* namespace core */
 } /* namespace libcwpp */
 
 #endif /* LIBCWPP_SIZE_HPP */
