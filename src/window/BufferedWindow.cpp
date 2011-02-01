@@ -1,4 +1,7 @@
+#include <assert.h>
+
 #include <libcwpp/window/BufferedWindow.hpp>
+#include <libcwpp/util/StringUtils.hpp>
 
 namespace libcwpp
 {
@@ -10,7 +13,25 @@ BufferedWindow::BufferedStream::BufferedStream(BufferedWindow* window)
 {
 }
 
+libcwpp::stream::Stream& BufferedWindow::BufferedStream::operator<<(char c)
+{
+    m_buffer += c;
+    return *this;
+}
+
+libcwpp::stream::Stream& BufferedWindow::BufferedStream::operator<<(int i)
+{
+    m_buffer += libcwpp::util::StringUtils::toString(i);
+    return *this;
+}
+
 libcwpp::stream::Stream& BufferedWindow::BufferedStream::operator<<(const char* s)
+{
+    m_buffer += s;
+    return *this;
+}
+
+libcwpp::stream::Stream& BufferedWindow::BufferedStream::operator<<(const std::string& s)
 {
     m_buffer += s;
     return *this;
@@ -25,7 +46,7 @@ libcwpp::stream::Stream& BufferedWindow::BufferedStream::operator<<(const libcwp
 }
 
 BufferedWindow::BufferedWindow(libcwpp::core::Size size)
-    : Window(size)
+    : Window(size), m_lastLineClosed(false)
 {
 }
 
@@ -51,7 +72,28 @@ void BufferedWindow::paint(void)
 
 void BufferedWindow::add(const std::string& buffer)
 {
-    m_lines.push_back(buffer);
+    if (buffer.empty())
+    {
+        return;
+    }
+
+    std::deque<std::string> lines = libcwpp::util::StringUtils::tokenize(buffer, "\n");
+    assert(!lines.empty());
+
+    if (!m_lines.empty() && !m_lastLineClosed)
+    {
+        m_lines.back() += lines.front();
+        lines.pop_front();
+    }
+
+    for (std::deque<std::string>::const_iterator it = lines.begin();
+         it != lines.end();
+         ++it)
+    {
+        m_lines.push_back(*it);
+    }
+
+    m_lastLineClosed = (buffer[buffer.size() - 1] == '\n');
 }
 
 } /* namespace window */

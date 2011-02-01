@@ -27,7 +27,10 @@ class BufferedWindow : public libcwpp::core::Window
       public:
         BufferedStream(BufferedWindow* window);
 
+        libcwpp::stream::Stream& operator<<(char c);
+        libcwpp::stream::Stream& operator<<(int i);
         libcwpp::stream::Stream& operator<<(const char* s);
+        libcwpp::stream::Stream& operator<<(const std::string& s);
 
         libcwpp::stream::Stream& operator<<(const libcwpp::stream::Flush& f);
 
@@ -41,6 +44,7 @@ class BufferedWindow : public libcwpp::core::Window
     void add(const std::string& buffer);
 
   private:
+    bool m_lastLineClosed;
     std::deque<std::string> m_lines;
 
     std::deque<libcwpp::stream::Stream*> m_streams;

@@ -17,9 +17,21 @@ int main(int argc, char** argv)
     s << "Hello";
     s << " ";
     s << "World!";
+    s << "\n";
     s << libcwpp::stream::Flush();
 
-    s << "This is the second line!" << libcwpp::stream::Flush();
+    s << "This is the second line!\n\n";
+    s << libcwpp::stream::Flush();
+
+    s << "This will be\nsplitted into two lines";
+    s << libcwpp::stream::Flush();
+
+    s << "\n\n";
+    s << 'c';
+    s << "=";
+    s << 42;
+    s << "\n";
+    s << libcwpp::stream::Flush();
 
     winMgr.run();
     sleep(3);
