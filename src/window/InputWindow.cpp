@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include <libcwpp/window/InputWindow.hpp>
 
 namespace libcwpp
@@ -43,6 +45,7 @@ void InputWindow::keyPressed(int key)
             m_position = m_buffer.size();
             break;
 
+        case 0x7f :
         case KEY_BACKSPACE :
             if (m_position > 0)
             {
