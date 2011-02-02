@@ -17,31 +17,10 @@ class BufferedWindow : public libcwpp::core::Window
   public:
     BufferedWindow(libcwpp::core::Size size);
 
+    void addText(const std::string& buffer);
     libcwpp::stream::Stream& createStream(void);
 
     void paint(void);
-
-  private:
-    class BufferedStream : public libcwpp::stream::Stream
-    {
-      public:
-        BufferedStream(BufferedWindow* window);
-
-        libcwpp::stream::Stream& operator<<(char c);
-        libcwpp::stream::Stream& operator<<(int i);
-        libcwpp::stream::Stream& operator<<(const char* s);
-        libcwpp::stream::Stream& operator<<(const std::string& s);
-
-        libcwpp::stream::Stream& operator<<(const libcwpp::stream::Flush& f);
-
-      private:
-        std::string m_buffer;
-
-        BufferedWindow* m_window;
-    }; /* class BufferedStream */
-
-    /* This function is used by BufferedStream to flush its buffer into the window. */
-    void add(const std::string& buffer);
 
   private:
     bool m_lastLineClosed;

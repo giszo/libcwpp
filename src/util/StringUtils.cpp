@@ -1,6 +1,6 @@
 #include <sstream>
 
-#include <libcwpp/util/StringUtils.hpp>
+#include "StringUtils.hpp"
 
 namespace libcwpp
 {
