@@ -16,6 +16,7 @@ void InputWindow::keyPressed(int key)
     {
         case '\n' :
         case KEY_ENTER :
+            inputReceived(m_buffer);
             m_position = 0;
             m_buffer.clear();
             break;

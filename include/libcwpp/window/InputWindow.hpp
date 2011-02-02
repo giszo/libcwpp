@@ -18,6 +18,8 @@ class InputWindow : public libcwpp::core::Window
     void keyPressed(int key);
     void paint(void);
 
+    virtual void inputReceived(const std::string& s) = 0;
+
   private:
     std::string m_prompt;
 

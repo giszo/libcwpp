@@ -2,41 +2,22 @@
 
 #include <libcwpp/core/WindowManager.hpp>
 #include <libcwpp/window/BufferedWindow.hpp>
+#include <libcwpp/window/InputWindow.hpp>
 #include <libcwpp/layout/RowFrame.hpp>
 
-class InputWindow : public libcwpp::core::Window
+class InputWindow : public libcwpp::window::InputWindow
 {
   public:
     InputWindow(libcwpp::stream::Stream& stream)
-        : Window(libcwpp::core::Size(1, INT_MAX, 1, 1)), m_stream(stream)
+        : libcwpp::window::InputWindow(libcwpp::core::Size(1, INT_MAX, 1, 1)), m_stream(stream)
     {}
 
-    void paint(void)
+    void inputReceived(const std::string& s)
     {
-        clear();
-        print(0, 0, "%s", m_buffer.c_str());
-    }
-
-    void keyPressed(int key)
-    {
-        switch (key)
-        {
-            case '\n' :
-            case KEY_ENTER :
-                m_stream << m_buffer << "\n" << libcwpp::stream::Flush();
-                m_buffer.clear();
-                break;
-
-            default :
-                m_buffer += (char)key;
-                break;
-        }
-
-        invalidate();
+        m_stream << s << "\n" << libcwpp::stream::Flush();
     }
 
   private:
-    std::string m_buffer;
     libcwpp::stream::Stream& m_stream;
 }; /* class InputWindow */
 
