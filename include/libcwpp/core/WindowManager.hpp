@@ -1,6 +1,8 @@
 #ifndef LIBCWPP_WINDOWMANAGER_HPP
 #define LIBCWPP_WINDOWMANAGER_HPP
 
+#include <set>
+
 #include <libcwpp/core/Frame.hpp>
 
 namespace libcwpp
@@ -29,9 +31,12 @@ class WindowManager
 
     bool init(void);
     void destroy(void);
-    void stop(void);
 
     int run(void);
+    void stop(void);
+
+    void buildPollTable(std::set<int>& r, std::set<int>& w, std::set<int>& e);
+    void handlePollEvents(std::set<int>& r, std::set<int>& w, std::set<int>& e);
 
   private:
     bool getTerminalSize(int& width, int& height);

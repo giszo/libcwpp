@@ -3,7 +3,6 @@
 #include <sys/ioctl.h>
 #include <sys/select.h>
 
-#include <iostream>
 #include <algorithm>
 
 #include <libcwpp/core/WindowManager.hpp>
@@ -51,6 +50,9 @@ bool WindowManager::init(void)
     keypad(stdscr, TRUE);
     curs_set(0);
 
+    /* Push an event so the initial layout work and painting will be triggered immediately. */
+    pushEvent(E_LAYOUT_CHANGED);
+
     return true;
 }
 
@@ -63,12 +65,6 @@ void WindowManager::destroy(void)
     endwin();
 }
 
-void WindowManager::stop(void)
-{
-    m_running = false;
-    pushEvent(E_NOP);
-}
-
 int WindowManager::run(void)
 {
     /* Do nothing if we have no root frame. */
@@ -77,42 +73,80 @@ int WindowManager::run(void)
         return 0;
     }
 
-    /* Push an event so the initial layout work and painting will be triggered immediately. */
-    pushEvent(E_LAYOUT_CHANGED);
-
     /* Enter to the mainloop ... */
     while (m_running)
     {
         int ret;
-        fd_set r;
+        int maxFd = 0;
+        fd_set readers;
         timeval timeOut = {0, 100 * 1000};
 
-        FD_ZERO(&r);
-        FD_SET(STDIN_FILENO, &r);
-        FD_SET(m_eventReceiver, &r);
+        std::set<int> r;
+        std::set<int> dummy;
+        buildPollTable(r, dummy, dummy);
 
-        ret = select(std::max(STDIN_FILENO, m_eventReceiver) + 1, &r, NULL, NULL, &timeOut);
+        FD_ZERO(&readers);
+        for (std::set<int>::const_iterator it = r.begin();
+             it != r.end();
+             ++it)
+        {
+            int fd = *it;
+            FD_SET(fd, &readers);
+            maxFd = std::max(maxFd, fd);
+        }
+
+        ret = select(maxFd + 1, &readers, NULL, NULL, &timeOut);
 
         if (ret > 0)
         {
-            if (FD_ISSET(STDIN_FILENO, &r))
+            r.clear();
+            dummy.clear();
+
+            if (FD_ISSET(STDIN_FILENO, &readers))
             {
-                handleStdin();
+                r.insert(STDIN_FILENO);
             }
 
-            if (FD_ISSET(m_eventReceiver, &r))
+            if (FD_ISSET(m_eventReceiver, &readers))
             {
-                int event;
-
-                if (read(m_eventReceiver, &event, 1) == 1)
-                {
-                    handleEvent(event);
-                }
+                r.insert(m_eventReceiver);
             }
+
+            handlePollEvents(r, dummy, dummy);
         }
     }
 
     return 0;
+}
+
+void WindowManager::stop(void)
+{
+    m_running = false;
+    pushEvent(E_NOP);
+}
+
+void WindowManager::buildPollTable(std::set<int>& r, std::set<int>& w, std::set<int>& e)
+{
+    r.insert(STDIN_FILENO);
+    r.insert(m_eventReceiver);
+}
+
+void WindowManager::handlePollEvents(std::set<int>& r, std::set<int>& w, std::set<int>& e)
+{
+    if (r.find(STDIN_FILENO) != r.end())
+    {
+        handleStdin();
+    }
+
+    if (r.find(m_eventReceiver) != r.end())
+    {
+        int event = 0;
+
+        if (read(m_eventReceiver, &event, 1) == 1)
+        {
+            handleEvent(event);
+        }
+    }
 }
 
 bool WindowManager::getTerminalSize(int& width, int& height)
