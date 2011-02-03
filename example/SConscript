@@ -30,3 +30,10 @@ env.Program(
     LIBS = ["cwpp"],
     LIBPATH = "../"
 )
+
+env.Program(
+    target = "input2",
+    source = ["input2.cpp"],
+    LIBS = ["cwpp"],
+    LIBPATH = "../"
+)
