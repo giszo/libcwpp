@@ -34,15 +34,15 @@ int main(int argc, char** argv)
     libcwpp::window::BufferedWindow output2(libcwpp::core::Size(1, INT_MAX, 1, INT_MAX));
     InputWindow input(output1.createStream(), output2.createStream());
 
-    libcwpp::layout::ColumnFrame cf(2);
-    cf.set(0, &output1);
-    cf.set(1, &output2);
+    libcwpp::layout::ColumnFrame cf;
+    cf.add(&output1);
+    cf.add(&output2);
 
-    libcwpp::layout::RowFrame frame(2);
-    frame.set(0, &cf);
-    frame.set(1, &input);
+    libcwpp::layout::RowFrame rf;
+    rf.add(&cf);
+    rf.add(&input);
 
-    winMgr.setRootFrame(&frame);
+    winMgr.setRootFrame(&rf);
     winMgr.setFocusedWindow(&input);
 
     winMgr.run();

@@ -43,9 +43,9 @@ int main(int argc, char** argv)
     BigWindow win1;
     LineWindow win2;
 
-    libcwpp::layout::RowFrame frame(2);
-    frame.set(0, &win1);
-    frame.set(1, &win2);
+    libcwpp::layout::RowFrame frame;
+    frame.add(&win1);
+    frame.add(&win2);
     winMgr.setRootFrame(&frame);
 
     winMgr.run();

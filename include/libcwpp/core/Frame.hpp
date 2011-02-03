@@ -1,6 +1,8 @@
 #ifndef LIBCWPP_FRAME_HPP
 #define LIBCWPP_FRAME_HPP
 
+#include <vector>
+
 #include <libcwpp/core/Size.hpp>
 
 namespace libcwpp
@@ -13,12 +15,13 @@ class WindowManager;
 class Frame
 {
   public:
-    Frame(int count);
+    Frame(void);
     virtual ~Frame(void);
 
     virtual Size getSize(void) = 0;
 
-    bool set(int index, Frame* child);
+    bool add(Frame* child);
+    bool insert(size_t index, Frame* child);
 
     void setWindowManager(WindowManager* windowManager);
 
@@ -28,8 +31,7 @@ class Frame
     virtual void layout(int x, int y, int width, int height) = 0;
 
   protected:
-    int m_count;
-    Frame** m_children;
+    std::vector<Frame*> m_children;
 
     WindowManager* m_windowManager;
 }; /* class Frame */

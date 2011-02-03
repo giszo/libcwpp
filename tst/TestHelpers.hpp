@@ -9,7 +9,7 @@ class TestFrame : public libcwpp::core::Frame
 {
   public:
     TestFrame(const libcwpp::core::Size& size)
-        : Frame(0),
+        : Frame(),
           m_x(-1), m_y(-1), m_width(-1), m_height(-1), m_layoutCalled(false),
           m_size(size)
     {}

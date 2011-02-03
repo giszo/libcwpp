@@ -9,12 +9,8 @@ namespace libcwpp
 namespace layout
 {
 
-RowFrame::RowFrame(int count)
-    : Frame(count)
-{
-}
-
-RowFrame::~RowFrame(void)
+RowFrame::RowFrame(void)
+    : Frame()
 {
 }
 
@@ -25,9 +21,11 @@ libcwpp::core::Size RowFrame::getSize(void)
     int minHeight = 0;
     int maxHeight = 0;
 
-    for (int i = 0; i < m_count; i++)
+    for (std::vector<libcwpp::core::Frame*>::const_iterator it = m_children.begin();
+         it != m_children.end();
+         ++it)
     {
-        libcwpp::core::Size size = m_children[i]->getSize();
+        libcwpp::core::Size size = (*it)->getSize();
 
         minWidth = std::max(minWidth, size.minWidth());
         maxWidth = std::max(maxWidth, size.maxWidth());
@@ -55,10 +53,11 @@ void RowFrame::layout(int x, int y, int width, int height)
     int remainingHeight = height;
 
     /* Do some calculation first. */
-    for (int i = 0; i < m_count; i++)
+    for (std::vector<libcwpp::core::Frame*>::const_iterator it = m_children.begin();
+         it != m_children.end();
+         ++it)
     {
-        libcwpp::core::Frame* child = m_children[i];
-        libcwpp::core::Size size = child->getSize();
+        libcwpp::core::Size size = (*it)->getSize();
 
         if (size.isHeightDynamic())
         {
@@ -80,9 +79,11 @@ void RowFrame::layout(int x, int y, int width, int height)
     }
 
     /* Do the actual layout work. */
-    for (int i = 0; i < m_count; i++)
+    for (std::vector<libcwpp::core::Frame*>::const_iterator it = m_children.begin();
+         it != m_children.end();
+         ++it)
     {
-        libcwpp::core::Frame* child = m_children[i];
+        libcwpp::core::Frame* child = *it;
         libcwpp::core::Size size = child->getSize();
 
         if (size.isHeightDynamic())

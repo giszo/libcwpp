@@ -11,8 +11,7 @@ namespace layout
 class RowFrame : public libcwpp::core::Frame
 {
   public:
-    RowFrame(int count);
-    virtual ~RowFrame();
+    RowFrame(void);
 
     libcwpp::core::Size getSize(void);
 

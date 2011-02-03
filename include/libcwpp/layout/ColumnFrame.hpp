@@ -11,8 +11,7 @@ namespace layout
 class ColumnFrame : public libcwpp::core::Frame
 {
   public:
-    ColumnFrame(int count);
-    virtual ~ColumnFrame(void);
+    ColumnFrame(void);
 
     libcwpp::core::Size getSize(void);
 

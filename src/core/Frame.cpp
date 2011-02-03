@@ -7,41 +7,24 @@ namespace libcwpp
 namespace core
 {
 
-Frame::Frame(int count)
-    : m_count(count), m_children(NULL),
-      m_windowManager(NULL)
+Frame::Frame(void)
+    : m_windowManager(NULL)
 {
-    if (m_count > 0)
-    {
-        m_children = new Frame*[m_count];
-
-        for (int i = 0; i < m_count; i++)
-        {
-            m_children[i] = NULL;
-        }
-    }
 }
 
 Frame::~Frame(void)
 {
-    delete[] m_children;
 }
 
-bool Frame::set(int index, Frame* child)
+bool Frame::add(Frame* child)
 {
-    if ((index < 0) ||
-        (index >= m_count))
-    {
-        return false;
-    }
+    m_children.push_back(child);
+    return true;
+}
 
-    m_children[index] = child;
-
-    if (m_windowManager != NULL)
-    {
-        child->setWindowManager(m_windowManager);
-    }
-
+bool Frame::insert(size_t index, Frame* child)
+{
+    m_children.insert(m_children.begin() + index, child);
     return true;
 }
 
@@ -49,25 +32,31 @@ void Frame::setWindowManager(WindowManager* windowManager)
 {
     m_windowManager = windowManager;
 
-    for (int i = 0; i < m_count; i++)
+    for (std::vector<Frame*>::const_iterator it = m_children.begin();
+         it != m_children.end();
+         ++it)
     {
-        m_children[i]->setWindowManager(windowManager);
+        (*it)->setWindowManager(windowManager);
     }
 }
 
 void Frame::paint(void)
 {
-    for (int i = 0; i < m_count; i++)
+    for (std::vector<Frame*>::const_iterator it = m_children.begin();
+         it != m_children.end();
+         ++it)
     {
-        m_children[i]->paint();
+        (*it)->paint();
     }
 }
 
 void Frame::refresh(void)
 {
-    for (int i = 0; i < m_count; i++)
+    for (std::vector<Frame*>::const_iterator it = m_children.begin();
+         it != m_children.end();
+         ++it)
     {
-        m_children[i]->refresh();
+        (*it)->refresh();
     }
 }
 

@@ -6,7 +6,6 @@
 class FrameTest : public CppUnit::TestFixture
 {
     CPPUNIT_TEST_SUITE(FrameTest);
-    CPPUNIT_TEST(testFrameInvalidSet);
     CPPUNIT_TEST(testRowFrameOneFixed);
     CPPUNIT_TEST(testRowFrameTwoFixed);
     CPPUNIT_TEST(testRowFrameOneDynamic);
@@ -17,7 +16,6 @@ class FrameTest : public CppUnit::TestFixture
     void setUp();
     void tearDown();
 
-    void testFrameInvalidSet();
     void testRowFrameOneFixed();
     void testRowFrameTwoFixed();
     void testRowFrameOneDynamic();

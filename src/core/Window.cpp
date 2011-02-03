@@ -7,7 +7,7 @@ namespace core
 {
 
 Window::Window(Size size)
-    : Frame(0), m_size(size),
+    : Frame(), m_size(size),
       m_width(0), m_height(0)
 {
     m_window = newwin(0, 0, 0, 0);

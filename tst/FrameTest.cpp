@@ -18,25 +18,13 @@ FrameTest::tearDown()
 }
 
 void
-FrameTest::testFrameInvalidSet()
-{
-    TEST_HEADER;
-
-    libcwpp::layout::RowFrame frame(3);
-
-    CPPUNIT_ASSERT_EQUAL(frame.set(-1, NULL), false);
-    CPPUNIT_ASSERT_EQUAL(frame.set( 3, NULL), false);
-    CPPUNIT_ASSERT_EQUAL(frame.set( 0, NULL), true);
-}
-
-void
 FrameTest::testRowFrameOneFixed()
 {
     TEST_HEADER;
 
     TestFrame tst1(libcwpp::core::Size(1, INT_MAX, 1, 1));
-    libcwpp::layout::RowFrame frame(1);
-    frame.set(0, &tst1);
+    libcwpp::layout::RowFrame frame;
+    frame.add(&tst1);
     frame.layout(0, 0, 80, 25);
 
     CPPUNIT_ASSERT(tst1.m_layoutCalled);
@@ -53,9 +41,9 @@ FrameTest::testRowFrameTwoFixed()
 
     TestFrame tst1(libcwpp::core::Size(1, INT_MAX, 3, 3));
     TestFrame tst2(libcwpp::core::Size(1, INT_MAX, 2, 2));
-    libcwpp::layout::RowFrame frame(2);
-    frame.set(0, &tst1);
-    frame.set(1, &tst2);
+    libcwpp::layout::RowFrame frame;
+    frame.add(&tst1);
+    frame.add(&tst2);
     frame.layout(0, 0, 80, 25);
 
     CPPUNIT_ASSERT(tst1.m_layoutCalled);
@@ -77,8 +65,8 @@ FrameTest::testRowFrameOneDynamic()
     TEST_HEADER;
 
     TestFrame tst1(libcwpp::core::Size(1, INT_MAX, 1, INT_MAX));
-    libcwpp::layout::RowFrame frame(1);
-    frame.set(0, &tst1);
+    libcwpp::layout::RowFrame frame;
+    frame.add(&tst1);
     frame.layout(0, 0, 80, 25);
 
     CPPUNIT_ASSERT(tst1.m_layoutCalled);
@@ -95,9 +83,9 @@ FrameTest::testRowFrameTwoDynamic()
 
     TestFrame tst1(libcwpp::core::Size(1, INT_MAX, 1, INT_MAX));
     TestFrame tst2(libcwpp::core::Size(1, INT_MAX, 1, INT_MAX));
-    libcwpp::layout::RowFrame frame(2);
-    frame.set(0, &tst1);
-    frame.set(1, &tst2);
+    libcwpp::layout::RowFrame frame;
+    frame.add(&tst1);
+    frame.add(&tst2);
     frame.layout(0, 0, 80, 24);
 
     CPPUNIT_ASSERT(tst1.m_layoutCalled);

@@ -29,9 +29,9 @@ int main(int argc, char** argv)
     libcwpp::window::BufferedWindow output(libcwpp::core::Size(1, INT_MAX, 1, INT_MAX));
     InputWindow input(output.createStream());
 
-    libcwpp::layout::RowFrame frame(2);
-    frame.set(0, &output);
-    frame.set(1, &input);
+    libcwpp::layout::RowFrame frame;
+    frame.add(&output);
+    frame.add(&input);
 
     winMgr.setRootFrame(&frame);
     winMgr.setFocusedWindow(&input);
