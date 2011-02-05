@@ -36,6 +36,7 @@ class BufferedWindow : public libcwpp::core::Window
 {
   public:
     BufferedWindow(libcwpp::core::Size size);
+    virtual ~BufferedWindow();
 
     void addText(const std::string& buffer);
     libcwpp::stream::Stream& createStream(void);

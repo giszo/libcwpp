@@ -35,6 +35,18 @@ BufferedWindow::BufferedWindow(libcwpp::core::Size size)
 {
 }
 
+
+BufferedWindow::~BufferedWindow()
+{
+  for ( std::deque<libcwpp::stream::Stream*>::const_iterator it = m_streams.begin();
+        it!=m_streams.end();
+        ++it )
+  {
+    delete *it;
+  }
+}
+
+
 void BufferedWindow::addText(const std::string& buffer)
 {
     if (buffer.empty())
