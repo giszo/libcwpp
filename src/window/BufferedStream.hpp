@@ -33,7 +33,7 @@ class BufferedWindow;
 class BufferedStream : public libcwpp::stream::Stream
 {
   public:
-    BufferedStream(BufferedWindow* window);
+    BufferedStream(BufferedWindow* window, bool autoFlush);
 
     libcwpp::stream::Stream& operator<<(char c);
     libcwpp::stream::Stream& operator<<(int i);
@@ -43,9 +43,13 @@ class BufferedStream : public libcwpp::stream::Stream
     libcwpp::stream::Stream& operator<<(const libcwpp::stream::Flush& f);
 
   private:
+    void flushIfNeeded(void);
+
+  private:
     std::string m_buffer;
 
     BufferedWindow* m_window;
+    bool m_autoFlush;
 }; /* class BufferedStream */
 
 } /* namespace window */

@@ -28,32 +28,36 @@ namespace libcwpp
 namespace window
 {
 
-BufferedStream::BufferedStream(BufferedWindow* window)
-    : m_window(window)
+BufferedStream::BufferedStream(BufferedWindow* window, bool autoFlush)
+    : m_window(window), m_autoFlush(autoFlush)
 {
 }
 
 libcwpp::stream::Stream& BufferedStream::operator<<(char c)
 {
     m_buffer += c;
+    flushIfNeeded();
     return *this;
 }
 
 libcwpp::stream::Stream& BufferedStream::operator<<(int i)
 {
     m_buffer += libcwpp::util::StringUtils::toString(i);
+    flushIfNeeded();
     return *this;
 }
 
 libcwpp::stream::Stream& BufferedStream::operator<<(const char* s)
 {
     m_buffer += s;
+    flushIfNeeded();
     return *this;
 }
 
 libcwpp::stream::Stream& BufferedStream::operator<<(const std::string& s)
 {
     m_buffer += s;
+    flushIfNeeded();
     return *this;
 }
 
@@ -62,6 +66,17 @@ libcwpp::stream::Stream& BufferedStream::operator<<(const libcwpp::stream::Flush
     m_window->addText(m_buffer);
     m_buffer.clear();
     return *this;
+}
+
+void BufferedStream::flushIfNeeded(void)
+{
+    if (!m_autoFlush)
+    {
+        return;
+    }
+
+    m_window->addText(m_buffer);
+    m_buffer.clear();
 }
 
 } /* namespace window */

@@ -39,7 +39,7 @@ class BufferedWindow : public libcwpp::core::Window
     virtual ~BufferedWindow();
 
     void addText(const std::string& buffer);
-    libcwpp::stream::Stream& createStream(void);
+    libcwpp::stream::Stream& createStream(bool autoFlush = false);
 
     void paint(void);
 

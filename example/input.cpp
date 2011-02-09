@@ -14,7 +14,7 @@ class InputWindow : public libcwpp::window::InputWindow
 
     void inputReceived(const std::string& s)
     {
-        m_stream << s << "\n" << libcwpp::stream::Flush();
+        m_stream << s << "\n";
     }
 
   private:
@@ -27,7 +27,7 @@ int main(int argc, char** argv)
     winMgr.init();
 
     libcwpp::window::BufferedWindow output(libcwpp::core::Size(1, INT_MAX, 1, INT_MAX));
-    InputWindow input(output.createStream());
+    InputWindow input(output.createStream(true));
 
     libcwpp::layout::RowFrame frame;
     frame.add(&output);

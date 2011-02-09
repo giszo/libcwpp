@@ -75,9 +75,9 @@ void BufferedWindow::addText(const std::string& buffer)
     invalidate();
 }
 
-libcwpp::stream::Stream& BufferedWindow::createStream(void)
+libcwpp::stream::Stream& BufferedWindow::createStream(bool autoFlush)
 {
-    libcwpp::stream::Stream* stream = new BufferedStream(this);
+    libcwpp::stream::Stream* stream = new BufferedStream(this, autoFlush);
     m_streams.push_back(stream);
     return *stream;
 }
