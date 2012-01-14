@@ -23,6 +23,8 @@
 
 #include <set>
 
+#include <boost/shared_ptr.hpp>
+
 #include <libcwpp/core/Frame.hpp>
 
 namespace libcwpp
@@ -46,8 +48,8 @@ class WindowManager
 
     WindowManager(void);
 
-    void setRootFrame(Frame* frame);
-    void setFocusedWindow(Window* window);
+    void setRootFrame(const boost::shared_ptr<Frame>& frame);
+    void setFocusedWindow(const boost::shared_ptr<Window>& window);
 
     bool init(void);
     void destroy(void);
@@ -67,8 +69,8 @@ class WindowManager
     void handleEvent(int event);
 
   private:
-    Frame* m_rootFrame;
-    Window* m_focusedWindow;
+    boost::shared_ptr<Frame> m_rootFrame;
+    boost::shared_ptr<Window> m_focusedWindow;
 
     int m_eventReceiver;
     int m_eventSender;

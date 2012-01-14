@@ -34,23 +34,23 @@ class Window : public Frame
 {
   public:
     Window(Size size);
-    ~Window(void);
+    virtual ~Window();
 
-    Size getSize(void);
+    Size getSize();
 
-    int width(void);
-    int height(void);
+    int width();
+    int height();
 
     void layout(int x, int y, int width, int height);
-    void refresh(void);
+    void refresh();
 
-    void clear(void);
+    void clear();
     void print(int x, int y, const char* format, ...) __attribute__(( format(printf, 4, 5) ));
 
-    void invalidate(void);
+    void invalidate();
 
     virtual void keyPressed(int key);
-    virtual void paint(void) = 0;
+    virtual void paint() = 0;
 
   private:
     Size m_size;

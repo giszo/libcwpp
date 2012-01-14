@@ -32,17 +32,17 @@ Frame::Frame(void)
 {
 }
 
-Frame::~Frame(void)
+Frame::~Frame()
 {
 }
 
-bool Frame::add(Frame* child)
+bool Frame::add(const boost::shared_ptr<Frame>& child)
 {
     m_children.push_back(child);
     return true;
 }
 
-bool Frame::insert(size_t index, Frame* child)
+bool Frame::insert(size_t index, const boost::shared_ptr<Frame>& child)
 {
     m_children.insert(m_children.begin() + index, child);
     return true;
@@ -52,32 +52,26 @@ void Frame::setWindowManager(WindowManager* windowManager)
 {
     m_windowManager = windowManager;
 
-    for (std::vector<Frame*>::const_iterator it = m_children.begin();
+    for (std::vector< boost::shared_ptr<Frame> >::const_iterator it = m_children.begin();
          it != m_children.end();
          ++it)
-    {
         (*it)->setWindowManager(windowManager);
-    }
 }
 
-void Frame::paint(void)
+void Frame::paint()
 {
-    for (std::vector<Frame*>::const_iterator it = m_children.begin();
+    for (std::vector< boost::shared_ptr<Frame> >::const_iterator it = m_children.begin();
          it != m_children.end();
          ++it)
-    {
         (*it)->paint();
-    }
 }
 
-void Frame::refresh(void)
+void Frame::refresh()
 {
-    for (std::vector<Frame*>::const_iterator it = m_children.begin();
+    for (std::vector< boost::shared_ptr<Frame> >::const_iterator it = m_children.begin();
          it != m_children.end();
          ++it)
-    {
         (*it)->refresh();
-    }
 }
 
 } /* namespace core */

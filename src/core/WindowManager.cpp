@@ -34,19 +34,17 @@ namespace core
 {
 
 WindowManager::WindowManager(void)
-    : m_rootFrame(NULL), m_focusedWindow(NULL),
-      m_eventReceiver(-1), m_eventSender(-1),
-      m_running(true)
+    : m_eventReceiver(-1), m_eventSender(-1), m_running(true)
 {
 }
 
-void WindowManager::setRootFrame(Frame* frame)
+void WindowManager::setRootFrame(const boost::shared_ptr<Frame>& frame)
 {
     m_rootFrame = frame;
     m_rootFrame->setWindowManager(this);
 }
 
-void WindowManager::setFocusedWindow(Window* window)
+void WindowManager::setFocusedWindow(const boost::shared_ptr<Window>& window)
 {
     m_focusedWindow = window;
 }
@@ -56,9 +54,7 @@ bool WindowManager::init(void)
     int pipes[2];
 
     if (pipe(pipes) != 0)
-    {
         return false;
-    }
 
     m_eventReceiver = pipes[0];
     m_eventSender = pipes[1];
@@ -88,10 +84,8 @@ void WindowManager::destroy(void)
 int WindowManager::run(void)
 {
     /* Do nothing if we have no root frame. */
-    if (m_rootFrame == NULL)
-    {
+    if (!m_rootFrame)
         return 0;
-    }
 
     /* Enter to the mainloop ... */
     while (m_running)
@@ -123,14 +117,10 @@ int WindowManager::run(void)
             dummy.clear();
 
             if (FD_ISSET(STDIN_FILENO, &readers))
-            {
                 r.insert(STDIN_FILENO);
-            }
 
             if (FD_ISSET(m_eventReceiver, &readers))
-            {
                 r.insert(m_eventReceiver);
-            }
 
             handlePollEvents(r, dummy, dummy);
         }
@@ -154,18 +144,14 @@ void WindowManager::buildPollTable(std::set<int>& r, std::set<int>& w, std::set<
 void WindowManager::handlePollEvents(std::set<int>& r, std::set<int>& w, std::set<int>& e)
 {
     if (r.find(STDIN_FILENO) != r.end())
-    {
         handleStdin();
-    }
 
     if (r.find(m_eventReceiver) != r.end())
     {
         int event = 0;
 
         if (read(m_eventReceiver, &event, 1) == 1)
-        {
             handleEvent(event);
-        }
     }
 }
 
@@ -174,9 +160,7 @@ bool WindowManager::getTerminalSize(int& width, int& height)
     winsize size;
 
     if (ioctl(STDIN_FILENO, TIOCGWINSZ, &size) != 0)
-    {
         return false;
-    }
 
     width = size.ws_col;
     height = size.ws_row;
@@ -198,14 +182,10 @@ void WindowManager::handleStdin(void)
     while ((c = getch()) != ERR)
     {
         if (c == 27)
-        {
             m_running = false;
-        }
 
-        if (m_focusedWindow != NULL)
-        {
+        if (m_focusedWindow)
             m_focusedWindow->keyPressed(c);
-        }
     }
 }
 

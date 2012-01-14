@@ -40,13 +40,13 @@ int main(int argc, char** argv)
     libcwpp::core::WindowManager winMgr;
     winMgr.init();
 
-    BigWindow win1;
-    LineWindow win2;
+    boost::shared_ptr<BigWindow> win1(new BigWindow());
+    boost::shared_ptr<LineWindow> win2(new LineWindow());
 
-    libcwpp::layout::RowFrame frame;
-    frame.add(&win1);
-    frame.add(&win2);
-    winMgr.setRootFrame(&frame);
+    boost::shared_ptr<libcwpp::layout::RowFrame> frame(new libcwpp::layout::RowFrame());
+    frame->add(win1);
+    frame->add(win2);
+    winMgr.setRootFrame(frame);
 
     winMgr.run();
     winMgr.destroy();

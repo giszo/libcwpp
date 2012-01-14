@@ -31,14 +31,14 @@ class Size
   public:
     Size(int minWidth, int maxWidth, int minHeight, int maxHeight);
 
-    int minWidth(void);
-    int maxWidth(void);
+    int minWidth();
+    int maxWidth();
 
-    int minHeight(void);
-    int maxHeight(void);
+    int minHeight();
+    int maxHeight();
 
-    bool isWidthDynamic(void) const;
-    bool isHeightDynamic(void) const;
+    bool isWidthDynamic() const;
+    bool isHeightDynamic() const;
 
   private:
     int m_minWidth;

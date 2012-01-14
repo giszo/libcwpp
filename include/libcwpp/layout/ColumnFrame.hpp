@@ -31,9 +31,9 @@ namespace layout
 class ColumnFrame : public libcwpp::core::Frame
 {
   public:
-    ColumnFrame(void);
+    ColumnFrame();
 
-    libcwpp::core::Size getSize(void);
+    libcwpp::core::Size getSize();
 
     void layout(int x, int y, int width, int height);
 }; /* class ColumnFrame */

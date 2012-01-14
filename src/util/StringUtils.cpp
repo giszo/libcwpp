@@ -59,9 +59,7 @@ std::deque<std::string> StringUtils::tokenize(const std::string& s, const std::s
     }
 
     if (j < s.size())
-    {
         tokens.push_back(s.substr(j, s.size() - j));
-    }
 
     return tokens;
 }

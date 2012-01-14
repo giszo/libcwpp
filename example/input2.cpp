@@ -30,20 +30,22 @@ int main(int argc, char** argv)
     libcwpp::core::WindowManager winMgr;
     winMgr.init();
 
-    libcwpp::window::BufferedWindow output1(libcwpp::core::Size(1, INT_MAX, 1, INT_MAX));
-    libcwpp::window::BufferedWindow output2(libcwpp::core::Size(1, INT_MAX, 1, INT_MAX));
-    InputWindow input(output1.createStream(), output2.createStream());
+    boost::shared_ptr<libcwpp::window::BufferedWindow> output1(
+        new libcwpp::window::BufferedWindow(libcwpp::core::Size(1, INT_MAX, 1, INT_MAX)));
+    boost::shared_ptr<libcwpp::window::BufferedWindow> output2(
+        new libcwpp::window::BufferedWindow(libcwpp::core::Size(1, INT_MAX, 1, INT_MAX)));
+    boost::shared_ptr<InputWindow> input(new InputWindow(output1->createStream(), output2->createStream()));
 
-    libcwpp::layout::ColumnFrame cf;
-    cf.add(&output1);
-    cf.add(&output2);
+    boost::shared_ptr<libcwpp::layout::ColumnFrame> cf(new libcwpp::layout::ColumnFrame());;
+    cf->add(output1);
+    cf->add(output2);
 
-    libcwpp::layout::RowFrame rf;
-    rf.add(&cf);
-    rf.add(&input);
+    boost::shared_ptr<libcwpp::layout::RowFrame> rf(new libcwpp::layout::RowFrame());
+    rf->add(cf);
+    rf->add(input);
 
-    winMgr.setRootFrame(&rf);
-    winMgr.setFocusedWindow(&input);
+    winMgr.setRootFrame(rf);
+    winMgr.setFocusedWindow(input);
 
     winMgr.run();
     winMgr.destroy();

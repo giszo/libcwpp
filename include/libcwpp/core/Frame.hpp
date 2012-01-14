@@ -23,6 +23,8 @@
 
 #include <vector>
 
+#include <boost/shared_ptr.hpp>
+
 #include <libcwpp/core/Size.hpp>
 
 namespace libcwpp
@@ -35,23 +37,24 @@ class WindowManager;
 class Frame
 {
   public:
-    Frame(void);
-    virtual ~Frame(void);
+    Frame();
+    virtual ~Frame();
 
-    virtual Size getSize(void) = 0;
+    virtual Size getSize() = 0;
 
-    bool add(Frame* child);
-    bool insert(size_t index, Frame* child);
+    bool add(const boost::shared_ptr<Frame>& child);
+    bool insert(size_t index, const boost::shared_ptr<Frame>& child);
 
     void setWindowManager(WindowManager* windowManager);
 
-    virtual void paint(void);
-    virtual void refresh(void);
+    virtual void paint();
+    virtual void refresh();
 
     virtual void layout(int x, int y, int width, int height) = 0;
 
   protected:
-    std::vector<Frame*> m_children;
+    typedef std::vector< boost::shared_ptr<Frame> > ChildTable;
+    ChildTable m_children;
 
     WindowManager* m_windowManager;
 }; /* class Frame */

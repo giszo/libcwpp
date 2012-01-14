@@ -21,8 +21,8 @@ int main(int argc, char** argv)
     libcwpp::core::WindowManager winMgr;
     winMgr.init();
 
-    HelloWindow window;
-    winMgr.setRootFrame(&window);
+    boost::shared_ptr<HelloWindow> window(new HelloWindow());
+    winMgr.setRootFrame(window);
 
     winMgr.run();
     winMgr.destroy();

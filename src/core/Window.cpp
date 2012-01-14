@@ -84,10 +84,8 @@ void Window::print(int x, int y, const char* format, ...)
 
 void Window::invalidate(void)
 {
-    if (m_windowManager == NULL)
-    {
+    if (!m_windowManager)
         return;
-    }
 
     m_windowManager->pushEvent(WindowManager::E_WINDOW_INVALIDATED);
 }

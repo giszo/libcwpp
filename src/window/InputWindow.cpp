@@ -45,16 +45,12 @@ void InputWindow::keyPressed(int key)
 
         case KEY_LEFT :
             if (m_position > 0)
-            {
                 m_position--;
-            }
             break;
 
         case KEY_RIGHT :
             if (m_position < m_buffer.size())
-            {
                 m_position++;
-            }
             break;
 
         case KEY_HOME :
@@ -76,9 +72,7 @@ void InputWindow::keyPressed(int key)
 
         case KEY_DC :
             if (m_position < m_buffer.size())
-            {
                 m_buffer.erase(m_position, 1);
-            }
             break;
 
         case KEY_UP :
@@ -99,9 +93,7 @@ void InputWindow::paint(void)
     clear();
 
     if (!m_prompt.empty())
-    {
         print(0, 0, "%s", m_prompt.c_str());
-    }
 
     print(m_prompt.size(), 0, "%s", m_buffer.c_str());
 }

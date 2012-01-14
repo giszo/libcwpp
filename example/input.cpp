@@ -26,15 +26,16 @@ int main(int argc, char** argv)
     libcwpp::core::WindowManager winMgr;
     winMgr.init();
 
-    libcwpp::window::BufferedWindow output(libcwpp::core::Size(1, INT_MAX, 1, INT_MAX));
-    InputWindow input(output.createStream(true));
+    boost::shared_ptr<libcwpp::window::BufferedWindow> output(
+        new libcwpp::window::BufferedWindow(libcwpp::core::Size(1, INT_MAX, 1, INT_MAX)));
+    boost::shared_ptr<InputWindow> input(new InputWindow(output->createStream(true)));
 
-    libcwpp::layout::RowFrame frame;
-    frame.add(&output);
-    frame.add(&input);
+    boost::shared_ptr<libcwpp::layout::RowFrame> frame(new libcwpp::layout::RowFrame());
+    frame->add(output);
+    frame->add(input);
 
-    winMgr.setRootFrame(&frame);
-    winMgr.setFocusedWindow(&input);
+    winMgr.setRootFrame(frame);
+    winMgr.setFocusedWindow(input);
 
     winMgr.run();
     winMgr.destroy();
