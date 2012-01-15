@@ -1,5 +1,3 @@
-#include <limits.h>
-
 #include "FrameTest.hpp"
 #include "TestHelpers.hpp"
 

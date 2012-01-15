@@ -21,6 +21,8 @@
 #ifndef LIBCWPP_SIZE_HPP
 #define LIBCWPP_SIZE_HPP
 
+#include <limits.h>
+
 namespace libcwpp
 {
 namespace core

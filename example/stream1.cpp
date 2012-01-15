@@ -1,5 +1,3 @@
-#include <limits.h>
-
 #include <libcwpp/core/WindowManager.hpp>
 #include <libcwpp/window/BufferedWindow.hpp>
 
