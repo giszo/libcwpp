@@ -37,6 +37,7 @@ class Window;
 class WindowManager
 {
   public:
+    friend class Frame;
     friend class Window;
 
     enum

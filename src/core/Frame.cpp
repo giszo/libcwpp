@@ -21,6 +21,7 @@
 #include <stddef.h>
 
 #include <libcwpp/core/Frame.hpp>
+#include <libcwpp/core/WindowManager.hpp>
 
 namespace libcwpp
 {
@@ -39,12 +40,43 @@ Frame::~Frame()
 bool Frame::add(const boost::shared_ptr<Frame>& child)
 {
     m_children.push_back(child);
+
+    if (m_windowManager)
+        child->setWindowManager(m_windowManager);
+
+    invalidateLayout();
+
     return true;
 }
 
 bool Frame::insert(size_t index, const boost::shared_ptr<Frame>& child)
 {
     m_children.insert(m_children.begin() + index, child);
+
+    if (m_windowManager)
+        child->setWindowManager(m_windowManager);
+
+    invalidateLayout();
+
+    return true;
+}
+
+bool Frame::set(size_t index, const boost::shared_ptr<Frame>& child)
+{
+    if (index >= m_children.size())
+        return false;
+
+    boost::shared_ptr<Frame> old = m_children[index];
+    m_children[index] = child;
+
+    if (m_windowManager)
+    {
+        old->setWindowManager(NULL);
+        child->setWindowManager(m_windowManager);
+    }
+
+    invalidateLayout();
+
     return true;
 }
 
@@ -72,6 +104,12 @@ void Frame::refresh()
          it != m_children.end();
          ++it)
         (*it)->refresh();
+}
+
+void Frame::invalidateLayout()
+{
+    if (m_windowManager)
+        m_windowManager->pushEvent(WindowManager::E_LAYOUT_CHANGED);
 }
 
 } /* namespace core */
