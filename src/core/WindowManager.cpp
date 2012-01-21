@@ -170,9 +170,7 @@ bool WindowManager::getTerminalSize(int& width, int& height)
 
 bool WindowManager::pushEvent(int event)
 {
-    int ret;
-    ret = write(m_eventSender, &event, 1);
-    return (ret == 1);
+    return write(m_eventSender, &event, 1) == 1;
 }
 
 void WindowManager::handleStdin(void)

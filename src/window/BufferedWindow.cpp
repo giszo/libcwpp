@@ -53,18 +53,22 @@ void BufferedWindow::addText(const std::string& buffer)
     std::deque<std::string> lines = libcwpp::util::StringUtils::tokenize(buffer, "\n");
     assert(!lines.empty());
 
-    if (!m_lines.empty() && !m_lastLineClosed)
     {
-        m_lines.back() += lines.front();
-        lines.pop_front();
+        cppg::thread::MutexGuard l(m_mutex);
+
+        if (!m_lines.empty() && !m_lastLineClosed)
+        {
+            m_lines.back() += lines.front();
+            lines.pop_front();
+        }
+
+        for (std::deque<std::string>::const_iterator it = lines.begin();
+             it != lines.end();
+             ++it)
+            m_lines.push_back(*it);
+
+        m_lastLineClosed = (buffer[buffer.size() - 1] == '\n');
     }
-
-    for (std::deque<std::string>::const_iterator it = lines.begin();
-         it != lines.end();
-         ++it)
-        m_lines.push_back(*it);
-
-    m_lastLineClosed = (buffer[buffer.size() - 1] == '\n');
 
     invalidate();
 }
@@ -82,12 +86,11 @@ void BufferedWindow::paint(void)
 
     clear();
 
-    for (std::deque<std::string>::const_iterator it = m_lines.begin();
-         it != m_lines.end();
-         ++it)
     {
-        const std::string& line = *it;
-        print(0, y++, "%s", line.c_str());
+        cppg::thread::MutexGuard l(m_mutex);
+
+        for (std::deque<std::string>::const_iterator it = m_lines.begin(); it != m_lines.end(); ++it)
+            print(0, y++, "%s", it->c_str());
     }
 }
 

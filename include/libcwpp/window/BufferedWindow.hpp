@@ -24,6 +24,8 @@
 #include <deque>
 #include <string>
 
+#include <libcppg/thread/Mutex.h>
+
 #include <libcwpp/core/Window.hpp>
 #include <libcwpp/stream/Stream.hpp>
 
@@ -48,6 +50,8 @@ class BufferedWindow : public libcwpp::core::Window
     std::deque<std::string> m_lines;
 
     std::deque<libcwpp::stream::Stream*> m_streams;
+
+    cppg::thread::Mutex m_mutex;
 }; /* class BufferedWindow */
 
 } /* namespace window */

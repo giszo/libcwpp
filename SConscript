@@ -18,23 +18,23 @@ headers = [
 ]
 
 sources = [
-    "src/core/Window.cpp",
-    "src/core/Frame.cpp",
-    "src/core/Size.cpp",
-    "src/core/WindowManager.cpp",
-    "src/layout/RowFrame.cpp",
-    "src/layout/ColumnFrame.cpp",
-    "src/window/BufferedWindow.cpp",
-    "src/window/BufferedStream.cpp",
-    "src/window/InputWindow.cpp",
-    "src/util/StringUtils.cpp"
+    "core/Window.cpp",
+    "core/Frame.cpp",
+    "core/Size.cpp",
+    "core/WindowManager.cpp",
+    "layout/RowFrame.cpp",
+    "layout/ColumnFrame.cpp",
+    "window/BufferedWindow.cpp",
+    "window/BufferedStream.cpp",
+    "window/InputWindow.cpp",
+    "util/StringUtils.cpp"
 ]
 
 # Compile
 shlib = env.SharedLibrary(
-    target = "libcwpp.so",
-    source = sources,
-    LIBS = ["ncurses"]
+    "cwpp",
+    source = ["src/%s" % x for x in sources],
+    LIBS = ["ncurses", "cppg"]
 )
 
 # Install
