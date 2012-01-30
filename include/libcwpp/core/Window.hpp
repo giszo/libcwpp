@@ -32,7 +32,7 @@ namespace core
 class Window : public Frame
 {
   public:
-    Window(Size size, Canvas* canvas = NULL);
+    Window(Size size, Canvas* canvas);
     virtual ~Window();
 
     Size getSize();

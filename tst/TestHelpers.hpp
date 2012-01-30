@@ -2,6 +2,7 @@
 #define TEST_HELPERS_HPP
 
 #include <libcwpp/core/Frame.hpp>
+#include <libcwpp/core/Canvas.hpp>
 
 class TestFrame : public libcwpp::core::Frame
 {
@@ -35,5 +36,46 @@ class TestFrame : public libcwpp::core::Frame
 
     libcwpp::core::Size m_size;
 }; /* class TestFrame */
+
+class TestCanvas : public libcwpp::core::Canvas
+{
+  public:
+    enum Command
+    {
+        CLEAR,
+        PRINT
+    };
+
+    struct Instruction
+    {
+        Instruction(Command cmd, int x = 0, int y = 0, const std::string& data = "")
+            : m_cmd(cmd), m_x(x), m_y(y), m_data(data)
+        {}
+
+        Command m_cmd;
+        int m_x;
+        int m_y;
+        std::string m_data;
+    };
+
+    virtual void clear()
+    {
+        m_instructions.push_back(Instruction(CLEAR));
+    }
+
+    virtual void print(int x, int y, const char* format, ...)
+    {
+        char buffer[1024];
+
+        va_list args;
+        va_start(args, format);
+        vsnprintf(buffer, sizeof(buffer), format, args);
+        va_end(args);
+
+        m_instructions.push_back(Instruction(PRINT, x, y, buffer));
+    }
+
+    std::vector<Instruction> m_instructions;
+};
 
 #endif /* TEST_HELPERS_HPP */

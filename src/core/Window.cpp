@@ -30,7 +30,10 @@ Window::Window(libcwpp::core::Size size, libcwpp::core::Canvas* canvas)
     if (canvas)
         m_canvas = canvas;
     else
+    {
         m_canvas = new Canvas();
+        m_canvas->init();
+    }
 }
 
 Window::~Window(void)

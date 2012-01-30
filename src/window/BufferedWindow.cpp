@@ -25,13 +25,10 @@
 #include "BufferedStream.hpp"
 #include "../util/StringUtils.hpp"
 
-namespace libcwpp
-{
-namespace window
-{
+using libcwpp::window::BufferedWindow;
 
-BufferedWindow::BufferedWindow(libcwpp::core::Size size)
-    : Window(size), m_lastLineClosed(false)
+BufferedWindow::BufferedWindow(libcwpp::core::Size size, libcwpp::core::Canvas* canvas)
+    : Window(size, canvas), m_lastLineClosed(false)
 {
 }
 
@@ -91,6 +88,3 @@ void BufferedWindow::paint(void)
             m_canvas->print(0, y++, "%s", it->c_str());
     }
 }
-
-} /* namespace window */
-} /* namespace libcwpp */

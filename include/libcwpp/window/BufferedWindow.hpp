@@ -37,13 +37,13 @@ namespace window
 class BufferedWindow : public libcwpp::core::Window
 {
   public:
-    BufferedWindow(libcwpp::core::Size size);
+    BufferedWindow(libcwpp::core::Size size, libcwpp::core::Canvas* canvas = NULL);
     virtual ~BufferedWindow();
 
     void addText(const std::string& buffer);
     libcwpp::stream::Stream& createStream(bool autoFlush = false);
 
-    void paint(void);
+    virtual void paint(void);
 
   private:
     bool m_lastLineClosed;

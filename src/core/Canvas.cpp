@@ -24,12 +24,17 @@ using libcwpp::core::Canvas;
 
 Canvas::Canvas()
 {
-    m_window = newwin(0, 0, 0, 0);
 }
 
 Canvas::~Canvas()
 {
-    delwin(m_window);
+    if (m_window)
+        delwin(m_window);
+}
+
+void Canvas::init()
+{
+    m_window = newwin(0, 0, 0, 0);
 }
 
 void Canvas::clear(void)

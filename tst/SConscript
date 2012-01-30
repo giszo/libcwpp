@@ -11,7 +11,8 @@ def run_unit_test(target, source, env) :
 
 sources = [
     "main.cpp",
-    "FrameTest.cpp"
+    "FrameTest.cpp",
+    "BufferedWindowTest.cpp"
 ]
 
 test = env.Program(

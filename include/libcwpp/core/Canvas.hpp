@@ -34,6 +34,8 @@ class Canvas
     Canvas();
     ~Canvas();
 
+    void init();
+
     virtual void clear();
     virtual void print(int x, int y, const char* format, ...) __attribute__((format(printf, 4, 5)));
 
