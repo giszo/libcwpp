@@ -15,7 +15,8 @@ headers = [
     "layout/RowFrame.hpp",
     "stream/Stream.hpp",
     "window/BufferedWindow.hpp",
-    "window/InputWindow.hpp"
+    "window/InputWindow.hpp",
+    "window/ListWindow.hpp"
 ]
 
 sources = [
@@ -29,6 +30,7 @@ sources = [
     "window/BufferedWindow.cpp",
     "window/BufferedStream.cpp",
     "window/InputWindow.cpp",
+    "window/ListWindow.cpp",
     "util/StringUtils.cpp"
 ]
 

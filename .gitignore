@@ -1,12 +1,13 @@
-src/*/*.os
-example/*.o
-tst/*.o
+/src/*/*.os
+/example/*.o
+/tst/*.o
 
-.sconsign.dblite
-libcwpp.so
-example/hello
-example/layout1
-example/stream1
-example/input
-example/input2
-tst/test
+/.sconsign.dblite
+/libcwpp.so
+/example/hello
+/example/layout1
+/example/stream1
+/example/input
+/example/input2
+/example/list
+/tst/test
