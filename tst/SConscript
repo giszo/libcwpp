@@ -1,11 +1,27 @@
 # -*- python -*-
 
-Import("env")
-env = env.Clone()
+import os
+import SCons
 
-env.Program(
-    target = "test",
-    source = ["main.cpp", "FrameTest.cpp"],
-    LIBS = ["cwpp", "cppunit"],
-    LIBPATH = "../"
+Import("env")
+
+def run_unit_test(target, source, env) :
+    if os.system("LD_LIBRARY_PATH=. ./tst/test") != 0 :
+        raise SCons.Errors.StopError("One or more unit test failed!")
+
+sources = [
+    "main.cpp",
+    "FrameTest.cpp"
+]
+
+test = env.Program(
+     "test",
+     source = sources,
+     LIBS = ["cwpp", "boost_unit_test_framework"],
+     LIBPATH = ["../"]
 )
+
+cmd = Command("_ut", [], Action(run_unit_test, None))
+Depends(cmd, test)
+
+Alias("unit_test", cmd)

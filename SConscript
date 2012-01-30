@@ -45,3 +45,6 @@ env.Alias("install", env.Install(lib_prefix, shlib))
 
 for header in headers :
     env.Alias("install", env.Install(inc_prefix + os.path.sep + header[:header.rfind('/')], "include/libcwpp/" + header))
+
+# Default target
+Default(shlib)

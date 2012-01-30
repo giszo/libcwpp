@@ -3,37 +3,41 @@
 Import("env")
 env = env.Clone()
 
-env.Program(
+examples = []
+
+examples.append(env.Program(
     target = "layout1",
     source = ["layout1.cpp"],
     LIBS = ["cwpp"],
     LIBPATH = "../"
-)
+))
 
-env.Program(
+examples.append(env.Program(
     target = "hello",
     source = ["hello.cpp"],
     LIBS = ["cwpp"],
     LIBPATH = "../"
-)
+))
 
-env.Program(
+examples.append(env.Program(
     target = "stream1",
     source = ["stream1.cpp"],
     LIBS = ["cwpp"],
     LIBPATH = "../"
-)
+))
 
-env.Program(
+examples.append(env.Program(
     target = "input",
     source = ["input.cpp"],
     LIBS = ["cwpp"],
     LIBPATH = "../"
-)
+))
 
-env.Program(
+examples.append(env.Program(
     target = "input2",
     source = ["input2.cpp"],
     LIBS = ["cwpp"],
     LIBPATH = "../"
-)
+))
+
+Alias("example", examples)

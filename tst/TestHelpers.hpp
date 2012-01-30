@@ -3,8 +3,6 @@
 
 #include <libcwpp/core/Frame.hpp>
 
-#define TEST_HEADER std::cout << std::endl << __FUNCTION__ << ": " << __FILE__ << ":" <<  __LINE__ << std::endl;
-
 class TestFrame : public libcwpp::core::Frame
 {
   public:
@@ -14,12 +12,12 @@ class TestFrame : public libcwpp::core::Frame
           m_size(size)
     {}
 
-    libcwpp::core::Size getSize(void)
+    libcwpp::core::Size getSize()
     {
         return m_size;
     }
 
-    void layout(int x, int y, int width, int height)
+    virtual void layout(int x, int y, int width, int height)
     {
         m_x = x;
         m_y = y;

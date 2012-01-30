@@ -1,17 +1,5 @@
-#include <cppunit/CompilerOutputter.h>
-#include <cppunit/extensions/TestFactoryRegistry.h>
-#include <cppunit/ui/text/TestRunner.h>
+#define BOOST_TEST_DYN_LINK
+#define BOOST_TEST_MAIN
 
-
-int main(int argc, char* argv[])
-{
-  CppUnit::Test *suite = CppUnit::TestFactoryRegistry::getRegistry().makeTest();
-  CppUnit::TextUi::TestRunner runner;
-
-  runner.addTest( suite );
-  runner.setOutputter( new CppUnit::CompilerOutputter( &runner.result(), std::cerr ) );
-  
-  bool wasSucessful = runner.run();
-  return wasSucessful ? 0 : 1;
-}
-
+#define BOOST_TEST_MODULE "C++ unit tests for libmdc"
+#include <boost/test/unit_test.hpp>
