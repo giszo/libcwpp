@@ -33,7 +33,7 @@ namespace window
 class InputWindow : public libcwpp::core::Window
 {
   public:
-    InputWindow(libcwpp::core::Size size, std::string prompt = "");
+    InputWindow(const libcwpp::core::Size& size, std::string prompt = "");
 
     void keyPressed(int key);
     void paint();

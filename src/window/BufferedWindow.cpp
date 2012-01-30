@@ -27,7 +27,7 @@
 
 using libcwpp::window::BufferedWindow;
 
-BufferedWindow::BufferedWindow(libcwpp::core::Size size, libcwpp::core::Canvas* canvas)
+BufferedWindow::BufferedWindow(const libcwpp::core::Size& size, libcwpp::core::Canvas* canvas)
     : Window(size, canvas), m_lastLineClosed(false)
 {
 }

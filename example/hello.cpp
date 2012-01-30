@@ -5,7 +5,7 @@ class HelloWindow : public libcwpp::core::Window
 {
   public:
     HelloWindow(void)
-        : Window(libcwpp::core::Size(1, INT_MAX, 1, INT_MAX))
+        : Window(libcwpp::core::Size(1, INT_MAX, 1, INT_MAX), NULL)
     {}
 
     void paint(void)

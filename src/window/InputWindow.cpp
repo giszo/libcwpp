@@ -22,13 +22,10 @@
 
 #include <libcwpp/window/InputWindow.hpp>
 
-namespace libcwpp
-{
-namespace window
-{
+using libcwpp::window::InputWindow;
 
-InputWindow::InputWindow(libcwpp::core::Size size, std::string prompt)
-    : Window(size), m_prompt(prompt), m_position(0)
+InputWindow::InputWindow(const libcwpp::core::Size& size, std::string prompt)
+    : Window(size, NULL), m_prompt(prompt), m_position(0)
 {
 }
 
@@ -97,6 +94,3 @@ void InputWindow::paint(void)
 
     m_canvas->print(m_prompt.size(), 0, "%s", m_buffer.c_str());
 }
-
-} /* namespace window */
-} /* namespace libcwpp */

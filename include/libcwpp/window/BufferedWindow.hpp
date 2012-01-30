@@ -37,7 +37,7 @@ namespace window
 class BufferedWindow : public libcwpp::core::Window
 {
   public:
-    BufferedWindow(libcwpp::core::Size size, libcwpp::core::Canvas* canvas = NULL);
+    BufferedWindow(const libcwpp::core::Size& size, libcwpp::core::Canvas* canvas = NULL);
     virtual ~BufferedWindow();
 
     void addText(const std::string& buffer);

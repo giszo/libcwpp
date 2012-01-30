@@ -40,4 +40,4 @@ examples.append(env.Program(
     LIBPATH = "../"
 ))
 
-Alias("example", examples)
+Alias("examples", examples)

@@ -6,7 +6,7 @@ class LineWindow : public libcwpp::core::Window
 {
   public:
     LineWindow(void)
-        : Window(libcwpp::core::Size(1, 1, 1, 1))
+        : Window(libcwpp::core::Size(1, 1, 1, 1), NULL)
     {}
 
     void paint(void)
@@ -19,7 +19,7 @@ class BigWindow : public libcwpp::core::Window
 {
   public:
     BigWindow(void)
-        : Window(libcwpp::core::Size(1, INT_MAX, 1, INT_MAX))
+        : Window(libcwpp::core::Size(1, INT_MAX, 1, INT_MAX), NULL)
     {}
 
     void paint(void)

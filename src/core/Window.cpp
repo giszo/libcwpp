@@ -23,7 +23,7 @@
 
 using libcwpp::core::Window;
 
-Window::Window(libcwpp::core::Size size, libcwpp::core::Canvas* canvas)
+Window::Window(const libcwpp::core::Size& size, libcwpp::core::Canvas* canvas)
     : Frame(), m_size(size),
       m_width(0), m_height(0)
 {
