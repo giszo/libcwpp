@@ -11,7 +11,7 @@ class LineWindow : public libcwpp::core::Window
 
     void paint(void)
     {
-        print(0, 0, "This is a one-line window.");
+        m_canvas->print(0, 0, "This is a one-line window.");
     }
 }; /* class MyWindow1 */
 
@@ -26,10 +26,10 @@ class BigWindow : public libcwpp::core::Window
     {
         int y = (height() - 3) / 2;
 
-        print(10, y, "This is a");
-        print(10, y + 1, "bigger window with");
-        print(10, y + 2, "more than one line");
-        print(width() - 3, height() - 1, ":)");
+        m_canvas->print(10, y, "This is a");
+        m_canvas->print(10, y + 1, "bigger window with");
+        m_canvas->print(10, y + 2, "more than one line");
+        m_canvas->print(width() - 3, height() - 1, ":)");
     }
 };
 

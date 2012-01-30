@@ -50,7 +50,7 @@ void BufferedWindow::addText(const std::string& buffer)
     if (buffer.empty())
         return;
 
-    std::deque<std::string> lines = libcwpp::util::StringUtils::tokenize(buffer, "\n");
+    TLines lines = libcwpp::util::StringUtils::tokenize(buffer, "\n");
     assert(!lines.empty());
 
     {
@@ -62,9 +62,7 @@ void BufferedWindow::addText(const std::string& buffer)
             lines.pop_front();
         }
 
-        for (std::deque<std::string>::const_iterator it = lines.begin();
-             it != lines.end();
-             ++it)
+        for (TLines::const_iterator it = lines.begin(); it != lines.end(); ++it)
             m_lines.push_back(*it);
 
         m_lastLineClosed = (buffer[buffer.size() - 1] == '\n');
@@ -84,13 +82,13 @@ void BufferedWindow::paint(void)
 {
     int y = 0;
 
-    clear();
+    m_canvas->clear();
 
     {
         cppg::thread::MutexGuard l(m_mutex);
 
-        for (std::deque<std::string>::const_iterator it = m_lines.begin(); it != m_lines.end(); ++it)
-            print(0, y++, "%s", it->c_str());
+        for (TLines::const_iterator it = m_lines.begin(); it != m_lines.end(); ++it)
+            m_canvas->print(0, y++, "%s", it->c_str());
     }
 }
 

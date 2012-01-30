@@ -90,12 +90,12 @@ void InputWindow::keyPressed(int key)
 
 void InputWindow::paint(void)
 {
-    clear();
+    m_canvas->clear();
 
     if (!m_prompt.empty())
-        print(0, 0, "%s", m_prompt.c_str());
+        m_canvas->print(0, 0, "%s", m_prompt.c_str());
 
-    print(m_prompt.size(), 0, "%s", m_buffer.c_str());
+    m_canvas->print(m_prompt.size(), 0, "%s", m_buffer.c_str());
 }
 
 } /* namespace window */

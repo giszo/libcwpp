@@ -10,7 +10,7 @@ class HelloWindow : public libcwpp::core::Window
 
     void paint(void)
     {
-        print((width() - 11) / 2, height() / 2, "Hello World");
+        m_canvas->print((width() - 11) / 2, height() / 2, "Hello World");
     }
 }; /* class HelloWindow */
 

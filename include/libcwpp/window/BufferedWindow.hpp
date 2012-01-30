@@ -47,7 +47,9 @@ class BufferedWindow : public libcwpp::core::Window
 
   private:
     bool m_lastLineClosed;
-    std::deque<std::string> m_lines;
+
+    typedef std::deque<std::string> TLines;
+    TLines m_lines;
 
     std::deque<libcwpp::stream::Stream*> m_streams;
 

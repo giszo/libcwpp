@@ -21,24 +21,24 @@
 #include <libcwpp/core/Window.hpp>
 #include <libcwpp/core/WindowManager.hpp>
 
-namespace libcwpp
-{
-namespace core
-{
+using libcwpp::core::Window;
 
-Window::Window(Size size)
+Window::Window(libcwpp::core::Size size, libcwpp::core::Canvas* canvas)
     : Frame(), m_size(size),
       m_width(0), m_height(0)
 {
-    m_window = newwin(0, 0, 0, 0);
+    if (canvas)
+        m_canvas = canvas;
+    else
+        m_canvas = new Canvas();
 }
 
 Window::~Window(void)
 {
-    delwin(m_window);
+    delete m_canvas;
 }
 
-Size Window::getSize(void)
+libcwpp::core::Size Window::getSize(void)
 {
     return m_size;
 }
@@ -55,31 +55,15 @@ int Window::height(void)
 
 void Window::layout(int x, int y, int width, int height)
 {
-    wresize(m_window, height, width);
-    mvwin(m_window, y, x);
+    m_canvas->moveTo(x, y, width, height);
 
     m_width = width;
     m_height = height;
 }
 
-void Window::refresh(void)
+void Window::refresh()
 {
-    wnoutrefresh(m_window);
-}
-
-void Window::clear(void)
-{
-    werase(m_window);
-}
-
-void Window::print(int x, int y, const char* format, ...)
-{
-    va_list args;
-
-    va_start(args, format);
-    wmove(m_window, y, x);
-    vw_printw(m_window, format, args);
-    va_end(args);
+    m_canvas->refresh();
 }
 
 void Window::invalidate(void)
@@ -94,6 +78,3 @@ void Window::keyPressed(int key)
 {
     /* do nothing here ... */
 }
-
-} /* namespace core */
-} /* namespace libcwpp */

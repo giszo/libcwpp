@@ -8,6 +8,7 @@ env = env.Clone()
 headers = [
     "core/Frame.hpp",
     "core/Size.hpp",
+    "core/Canvas.hpp",
     "core/Window.hpp",
     "core/WindowManager.hpp",
     "layout/ColumnFrame.hpp",
@@ -21,6 +22,7 @@ sources = [
     "core/Window.cpp",
     "core/Frame.cpp",
     "core/Size.cpp",
+    "core/Canvas.cpp",
     "core/WindowManager.cpp",
     "layout/RowFrame.cpp",
     "layout/ColumnFrame.cpp",

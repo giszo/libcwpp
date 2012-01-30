@@ -1,7 +1,7 @@
 /*
  * Window manager library for console applications.
  *
- * Copyright (c) 2011  Peter Hajdu, Zoltan Kovacs
+ * Copyright (c) 2012 Zoltan Kovacs
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -18,47 +18,42 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
 
-#ifndef LIBCWPP_WINDOW_HPP
-#define LIBCWPP_WINDOW_HPP
-
-#include <libcwpp/core/Frame.hpp>
 #include <libcwpp/core/Canvas.hpp>
 
-namespace libcwpp
+using libcwpp::core::Canvas;
+
+Canvas::Canvas()
 {
-namespace core
+    m_window = newwin(0, 0, 0, 0);
+}
+
+Canvas::~Canvas()
 {
+    delwin(m_window);
+}
 
-class Window : public Frame
+void Canvas::clear(void)
 {
-  public:
-    Window(Size size, Canvas* canvas = NULL);
-    virtual ~Window();
+    werase(m_window);
+}
 
-    Size getSize();
+void Canvas::print(int x, int y, const char* format, ...)
+{
+    va_list args;
 
-    int width();
-    int height();
+    va_start(args, format);
+    wmove(m_window, y, x);
+    vw_printw(m_window, format, args);
+    va_end(args);
+}
 
-    void layout(int x, int y, int width, int height);
-    void refresh();
+void Canvas::refresh(void)
+{
+    wnoutrefresh(m_window);
+}
 
-    void invalidate();
-
-    virtual void keyPressed(int key);
-    virtual void paint() = 0;
-
-  protected:
-    Canvas* m_canvas;
-
-  private:
-    Size m_size;
-
-    int m_width;
-    int m_height;
-}; /* class Window */
-
-} /* namespace core */
-} /* namespace libcwpp */
-
-#endif /* LIBCWPP_WINDOW_HPP */
+void Canvas::moveTo(int x, int y, int width, int height)
+{
+    wresize(m_window, height, width);
+    mvwin(m_window, y, x);
+}

@@ -1,7 +1,7 @@
 /*
  * Window manager library for console applications.
  *
- * Copyright (c) 2011  Peter Hajdu, Zoltan Kovacs
+ * Copyright (c) 2012 Zoltan Kovacs
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -18,47 +18,34 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
 
-#ifndef LIBCWPP_WINDOW_HPP
-#define LIBCWPP_WINDOW_HPP
+#ifndef LIBCWPP_CANVAS_HPP
+#define LIBCWPP_CANVAS_HPP
 
-#include <libcwpp/core/Frame.hpp>
-#include <libcwpp/core/Canvas.hpp>
+#include <ncurses.h>
 
 namespace libcwpp
 {
 namespace core
 {
 
-class Window : public Frame
+class Canvas
 {
   public:
-    Window(Size size, Canvas* canvas = NULL);
-    virtual ~Window();
+    Canvas();
+    ~Canvas();
 
-    Size getSize();
+    virtual void clear();
+    virtual void print(int x, int y, const char* format, ...) __attribute__((format(printf, 4, 5)));
 
-    int width();
-    int height();
-
-    void layout(int x, int y, int width, int height);
     void refresh();
 
-    void invalidate();
-
-    virtual void keyPressed(int key);
-    virtual void paint() = 0;
-
-  protected:
-    Canvas* m_canvas;
+    void moveTo(int x, int y, int width, int height);
 
   private:
-    Size m_size;
+    WINDOW* m_window;
+};
 
-    int m_width;
-    int m_height;
-}; /* class Window */
+}
+}
 
-} /* namespace core */
-} /* namespace libcwpp */
-
-#endif /* LIBCWPP_WINDOW_HPP */
+#endif
