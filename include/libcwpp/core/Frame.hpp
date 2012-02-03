@@ -44,6 +44,8 @@ class Frame
 
     bool add(const boost::shared_ptr<Frame>& child);
     bool insert(size_t index, const boost::shared_ptr<Frame>& child);
+
+    const boost::shared_ptr<Frame>& get(size_t index) const;
     bool set(size_t index, const boost::shared_ptr<Frame>& child);
 
     void setWindowManager(WindowManager* windowManager);

@@ -61,6 +61,11 @@ bool Frame::insert(size_t index, const boost::shared_ptr<Frame>& child)
     return true;
 }
 
+const boost::shared_ptr<Frame>& Frame::get(size_t index) const
+{
+    return m_children[index];
+}
+
 bool Frame::set(size_t index, const boost::shared_ptr<Frame>& child)
 {
     if (index >= m_children.size())
