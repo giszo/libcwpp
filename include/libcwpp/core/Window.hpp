@@ -21,8 +21,8 @@
 #ifndef LIBCWPP_WINDOW_HPP
 #define LIBCWPP_WINDOW_HPP
 
-#include <libcwpp/core/Frame.hpp>
-#include <libcwpp/core/Canvas.hpp>
+#include "Frame.hpp"
+#include "Canvas.hpp"
 
 namespace libcwpp
 {

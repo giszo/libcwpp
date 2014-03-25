@@ -22,10 +22,9 @@
 #define LIBCWPP_FRAME_HPP
 
 #include <vector>
+#include <memory>
 
-#include <boost/shared_ptr.hpp>
-
-#include <libcwpp/core/Size.hpp>
+#include "Size.hpp"
 
 namespace libcwpp
 {
@@ -42,11 +41,11 @@ class Frame
 
     virtual Size getSize() = 0;
 
-    bool add(const boost::shared_ptr<Frame>& child);
-    bool insert(size_t index, const boost::shared_ptr<Frame>& child);
+    bool add(const std::shared_ptr<Frame>& child);
+    bool insert(size_t index, const std::shared_ptr<Frame>& child);
 
-    const boost::shared_ptr<Frame>& get(size_t index) const;
-    bool set(size_t index, const boost::shared_ptr<Frame>& child);
+    const std::shared_ptr<Frame>& get(size_t index) const;
+    bool set(size_t index, const std::shared_ptr<Frame>& child);
 
     void setWindowManager(WindowManager* windowManager);
 
@@ -56,7 +55,7 @@ class Frame
     virtual void layout(int x, int y, int width, int height) = 0;
 
   protected:
-    typedef std::vector< boost::shared_ptr<Frame> > ChildTable;
+    typedef std::vector<std::shared_ptr<Frame>> ChildTable;
     ChildTable m_children;
 
     WindowManager* m_windowManager;

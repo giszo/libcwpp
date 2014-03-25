@@ -38,7 +38,7 @@ sources = [
 shlib = env.SharedLibrary(
     "cwpp",
     source = ["src/%s" % x for x in sources],
-    LIBS = ["ncurses", "cppg"]
+    LIBS = ["ncurses"]
 )
 
 # Install

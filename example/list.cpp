@@ -27,8 +27,8 @@ int main(int argc, char** argv)
     winMgr.init();
 
     MySource source;
-    boost::shared_ptr<libcwpp::window::ListWindow> win(
-        new libcwpp::window::ListWindow(libcwpp::core::Size(1, INT_MAX, 1, INT_MAX), source));
+    std::shared_ptr<libcwpp::window::ListWindow> win =
+        std::make_shared<libcwpp::window::ListWindow>(libcwpp::core::Size(1, INT_MAX, 1, INT_MAX), source);
     win->enableSelect();
 
     winMgr.setRootFrame(win);

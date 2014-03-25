@@ -6,8 +6,8 @@ int main(int argc, char** argv)
     libcwpp::core::WindowManager winMgr;
     winMgr.init();
 
-    boost::shared_ptr<libcwpp::window::BufferedWindow> win(
-        new libcwpp::window::BufferedWindow(libcwpp::core::Size(1, INT_MAX, 1, INT_MAX)));
+    std::shared_ptr<libcwpp::window::BufferedWindow> win =
+        std::make_shared<libcwpp::window::BufferedWindow>(libcwpp::core::Size(1, INT_MAX, 1, INT_MAX));
     winMgr.setRootFrame(win);
 
     libcwpp::stream::Stream& s = win->createStream();

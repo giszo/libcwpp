@@ -18,7 +18,7 @@ class TestFrame : public libcwpp::core::Frame
         return m_size;
     }
 
-    virtual void layout(int x, int y, int width, int height)
+    void layout(int x, int y, int width, int height) override
     {
         m_x = x;
         m_y = y;
@@ -58,12 +58,12 @@ class TestCanvas : public libcwpp::core::Canvas
         std::string m_data;
     };
 
-    virtual void clear()
+    void clear() override
     {
         m_instructions.push_back(Instruction(CLEAR));
     }
 
-    virtual void print(int x, int y, const char* format, ...)
+    void print(int x, int y, const char* format, ...) override
     {
         char buffer[1024];
 

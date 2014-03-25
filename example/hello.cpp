@@ -19,7 +19,7 @@ int main(int argc, char** argv)
     libcwpp::core::WindowManager winMgr;
     winMgr.init();
 
-    boost::shared_ptr<HelloWindow> window(new HelloWindow());
+    std::shared_ptr<HelloWindow> window = std::make_shared<HelloWindow>();
     winMgr.setRootFrame(window);
 
     winMgr.run();

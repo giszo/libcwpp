@@ -51,7 +51,7 @@ void BufferedWindow::addText(const std::string& buffer)
     assert(!lines.empty());
 
     {
-        cppg::thread::MutexGuard l(m_mutex);
+        std::unique_lock<std::mutex> l(m_mutex);
 
         if (!m_lines.empty() && !m_lastLineClosed)
         {
@@ -82,7 +82,7 @@ void BufferedWindow::paint(void)
     m_canvas->clear();
 
     {
-        cppg::thread::MutexGuard l(m_mutex);
+        std::unique_lock<std::mutex> l(m_mutex);
 
         for (TLines::const_iterator it = m_lines.begin(); it != m_lines.end(); ++it)
             m_canvas->print(0, y++, "%s", it->c_str());

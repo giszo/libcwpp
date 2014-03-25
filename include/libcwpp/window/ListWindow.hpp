@@ -47,8 +47,8 @@ class ListWindow : public core::Window
 
     void enableSelect();
 
-    virtual void keyPressed(int key);
-    virtual void paint();
+    void keyPressed(int key) override;
+    void paint() override;
 
   private:
     bool m_selectEnabled;

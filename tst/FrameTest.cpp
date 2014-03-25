@@ -11,7 +11,7 @@ struct RowFrameFixture
 
 BOOST_FIXTURE_TEST_CASE(TestRowFrameOneFixed, RowFrameFixture)
 {
-    boost::shared_ptr<TestFrame> tst1(new TestFrame(libcwpp::core::Size(1, INT_MAX, 1, 1)));
+    std::shared_ptr<TestFrame> tst1(new TestFrame(libcwpp::core::Size(1, INT_MAX, 1, 1)));
     frame.add(tst1);
     frame.layout(0, 0, 80, 25);
 
@@ -24,8 +24,8 @@ BOOST_FIXTURE_TEST_CASE(TestRowFrameOneFixed, RowFrameFixture)
 
 BOOST_FIXTURE_TEST_CASE(TestRowFrameTwoFixed, RowFrameFixture)
 {
-    boost::shared_ptr<TestFrame> tst1(new TestFrame(libcwpp::core::Size(1, INT_MAX, 3, 3)));
-    boost::shared_ptr<TestFrame> tst2(new TestFrame(libcwpp::core::Size(1, INT_MAX, 2, 2)));
+    std::shared_ptr<TestFrame> tst1(new TestFrame(libcwpp::core::Size(1, INT_MAX, 3, 3)));
+    std::shared_ptr<TestFrame> tst2(new TestFrame(libcwpp::core::Size(1, INT_MAX, 2, 2)));
     frame.add(tst1);
     frame.add(tst2);
     frame.layout(0, 0, 80, 25);
@@ -45,7 +45,7 @@ BOOST_FIXTURE_TEST_CASE(TestRowFrameTwoFixed, RowFrameFixture)
 
 BOOST_FIXTURE_TEST_CASE(TestRowFrameOneDynamic, RowFrameFixture)
 {
-    boost::shared_ptr<TestFrame> tst1(new TestFrame(libcwpp::core::Size(1, INT_MAX, 1, INT_MAX)));
+    std::shared_ptr<TestFrame> tst1(new TestFrame(libcwpp::core::Size(1, INT_MAX, 1, INT_MAX)));
     frame.add(tst1);
     frame.layout(0, 0, 80, 25);
 
@@ -58,8 +58,8 @@ BOOST_FIXTURE_TEST_CASE(TestRowFrameOneDynamic, RowFrameFixture)
 
 BOOST_FIXTURE_TEST_CASE(TestRowFrameTwoDynamic, RowFrameFixture)
 {
-    boost::shared_ptr<TestFrame> tst1(new TestFrame(libcwpp::core::Size(1, INT_MAX, 1, INT_MAX)));
-    boost::shared_ptr<TestFrame> tst2(new TestFrame(libcwpp::core::Size(1, INT_MAX, 1, INT_MAX)));
+    std::shared_ptr<TestFrame> tst1(new TestFrame(libcwpp::core::Size(1, INT_MAX, 1, INT_MAX)));
+    std::shared_ptr<TestFrame> tst2(new TestFrame(libcwpp::core::Size(1, INT_MAX, 1, INT_MAX)));
     frame.add(tst1);
     frame.add(tst2);
     frame.layout(0, 0, 80, 24);

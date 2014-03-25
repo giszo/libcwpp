@@ -81,9 +81,8 @@ void ColumnFrame::layout(int x, int y, int width, int height)
         dynamicWidth = 0;
 
     /* Do the actual layout work. */
-    for (ChildTable::const_iterator it = m_children.begin(); it != m_children.end(); ++it)
+    for (const auto& child : m_children)
     {
-        boost::shared_ptr<libcwpp::core::Frame> child = *it;
         libcwpp::core::Size size = child->getSize();
 
         if (size.isWidthDynamic())

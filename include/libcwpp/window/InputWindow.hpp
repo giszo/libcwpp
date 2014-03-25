@@ -35,8 +35,8 @@ class InputWindow : public libcwpp::core::Window
   public:
     InputWindow(const libcwpp::core::Size& size, std::string prompt = "");
 
-    void keyPressed(int key);
-    void paint();
+    void keyPressed(int key) override;
+    void paint() override;
 
     virtual void inputReceived(const std::string& s) = 0;
 

@@ -32,7 +32,7 @@ class Canvas
 {
   public:
     Canvas();
-    ~Canvas();
+    virtual ~Canvas();
 
     void init();
 

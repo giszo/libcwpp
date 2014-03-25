@@ -23,8 +23,7 @@
 
 #include <deque>
 #include <string>
-
-#include <libcppg/thread/Mutex.h>
+#include <mutex>
 
 #include <libcwpp/core/Window.hpp>
 #include <libcwpp/stream/Stream.hpp>
@@ -43,7 +42,7 @@ class BufferedWindow : public libcwpp::core::Window
     void addText(const std::string& buffer);
     libcwpp::stream::Stream& createStream(bool autoFlush = false);
 
-    virtual void paint(void);
+    void paint(void) override;
 
   private:
     bool m_lastLineClosed;
@@ -53,7 +52,7 @@ class BufferedWindow : public libcwpp::core::Window
 
     std::deque<libcwpp::stream::Stream*> m_streams;
 
-    cppg::thread::Mutex m_mutex;
+    std::mutex m_mutex;
 }; /* class BufferedWindow */
 
 } /* namespace window */

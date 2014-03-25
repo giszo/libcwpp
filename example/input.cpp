@@ -24,11 +24,11 @@ int main(int argc, char** argv)
     libcwpp::core::WindowManager winMgr;
     winMgr.init();
 
-    boost::shared_ptr<libcwpp::window::BufferedWindow> output(
-        new libcwpp::window::BufferedWindow(libcwpp::core::Size(1, INT_MAX, 1, INT_MAX)));
-    boost::shared_ptr<InputWindow> input(new InputWindow(output->createStream(true)));
+    std::shared_ptr<libcwpp::window::BufferedWindow> output =
+        std::make_shared<libcwpp::window::BufferedWindow>(libcwpp::core::Size(1, INT_MAX, 1, INT_MAX));
+    std::shared_ptr<InputWindow> input = std::make_shared<InputWindow>(output->createStream(true));
 
-    boost::shared_ptr<libcwpp::layout::RowFrame> frame(new libcwpp::layout::RowFrame());
+    std::shared_ptr<libcwpp::layout::RowFrame> frame = std::make_shared<libcwpp::layout::RowFrame>();
     frame->add(output);
     frame->add(input);
 

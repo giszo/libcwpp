@@ -37,7 +37,7 @@ Frame::~Frame()
 {
 }
 
-bool Frame::add(const boost::shared_ptr<Frame>& child)
+bool Frame::add(const std::shared_ptr<Frame>& child)
 {
     m_children.push_back(child);
 
@@ -49,7 +49,7 @@ bool Frame::add(const boost::shared_ptr<Frame>& child)
     return true;
 }
 
-bool Frame::insert(size_t index, const boost::shared_ptr<Frame>& child)
+bool Frame::insert(size_t index, const std::shared_ptr<Frame>& child)
 {
     m_children.insert(m_children.begin() + index, child);
 
@@ -61,17 +61,17 @@ bool Frame::insert(size_t index, const boost::shared_ptr<Frame>& child)
     return true;
 }
 
-const boost::shared_ptr<Frame>& Frame::get(size_t index) const
+const std::shared_ptr<Frame>& Frame::get(size_t index) const
 {
     return m_children[index];
 }
 
-bool Frame::set(size_t index, const boost::shared_ptr<Frame>& child)
+bool Frame::set(size_t index, const std::shared_ptr<Frame>& child)
 {
     if (index >= m_children.size())
         return false;
 
-    boost::shared_ptr<Frame> old = m_children[index];
+    std::shared_ptr<Frame> old = m_children[index];
     m_children[index] = child;
 
     if (m_windowManager)
@@ -89,26 +89,20 @@ void Frame::setWindowManager(WindowManager* windowManager)
 {
     m_windowManager = windowManager;
 
-    for (std::vector< boost::shared_ptr<Frame> >::const_iterator it = m_children.begin();
-         it != m_children.end();
-         ++it)
-        (*it)->setWindowManager(windowManager);
+    for (const auto& it : m_children)
+	it->setWindowManager(windowManager);
 }
 
 void Frame::paint()
 {
-    for (std::vector< boost::shared_ptr<Frame> >::const_iterator it = m_children.begin();
-         it != m_children.end();
-         ++it)
-        (*it)->paint();
+    for (const auto& it : m_children)
+	it->paint();
 }
 
 void Frame::refresh()
 {
-    for (std::vector< boost::shared_ptr<Frame> >::const_iterator it = m_children.begin();
-         it != m_children.end();
-         ++it)
-        (*it)->refresh();
+    for (const auto& it : m_children)
+	it->refresh();
 }
 
 void Frame::invalidateLayout()

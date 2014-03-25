@@ -38,10 +38,10 @@ int main(int argc, char** argv)
     libcwpp::core::WindowManager winMgr;
     winMgr.init();
 
-    boost::shared_ptr<BigWindow> win1(new BigWindow());
-    boost::shared_ptr<LineWindow> win2(new LineWindow());
+    std::shared_ptr<BigWindow> win1 = std::make_shared<BigWindow>();
+    std::shared_ptr<LineWindow> win2 = std::make_shared<LineWindow>();
 
-    boost::shared_ptr<libcwpp::layout::RowFrame> frame(new libcwpp::layout::RowFrame());
+    std::shared_ptr<libcwpp::layout::RowFrame> frame = std::make_shared<libcwpp::layout::RowFrame>();
     frame->add(win1);
     frame->add(win2);
     winMgr.setRootFrame(frame);

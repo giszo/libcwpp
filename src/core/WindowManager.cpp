@@ -38,13 +38,13 @@ WindowManager::WindowManager(void)
 {
 }
 
-void WindowManager::setRootFrame(const boost::shared_ptr<Frame>& frame)
+void WindowManager::setRootFrame(const std::shared_ptr<Frame>& frame)
 {
     m_rootFrame = frame;
     m_rootFrame->setWindowManager(this);
 }
 
-void WindowManager::setFocusedWindow(const boost::shared_ptr<Window>& window)
+void WindowManager::setFocusedWindow(const std::shared_ptr<Window>& window)
 {
     m_focusedWindow = window;
 }

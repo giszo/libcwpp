@@ -33,6 +33,9 @@ class Flush {};
 class Stream
 {
   public:
+    virtual ~Stream()
+    {}
+
     virtual Stream& operator<<(char c) = 0;
     virtual Stream& operator<<(int i) = 0;
     virtual Stream& operator<<(const char* s) = 0;
